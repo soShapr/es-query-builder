@@ -1,5 +1,7 @@
 # esQueryBuilder
 
+[![Build Status](https://travis-ci.org/belaz/es-query-builder.svg?branch=master)](https://travis-ci.org/belaz/es-query-builder)
+
 **Bootstrap**
 
 `choco install php --version 5.5.38`
