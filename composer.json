@@ -1,5 +1,5 @@
 {
-    "name": "esQueryBuilder",
+    "name": "belaz/esQueryBuilder",
     "description": "ElasticSearch query builder",
     "keywords": ["es","elasticsearch","query","dsl"],
     "type": "library",
