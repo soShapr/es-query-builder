@@ -9,7 +9,7 @@ clean:
 	rm -rf build/artifacts/*
 
 test:
-	sh vendor/bin/phpunit
+	vendor/bin/phpunit
 
 test-phar: package
 	[ -f build/artifacts/behat.phar ] || (cd build/artifacts && \
@@ -19,7 +19,7 @@ test-phar: package
 	php -dopcache.enable_cli=1 build/phar-test-runner.php --format=progress
 
 coverage:
-	sh vendor/bin/phpunit --testsuite=unit --coverage-html=build/artifacts/coverage $(TEST)
+	vendor/bin/phpunit --testsuite=unit --coverage-html=build/artifacts/coverage $(TEST)
 
 coverage-show:
 	open build/artifacts/coverage/index.html
