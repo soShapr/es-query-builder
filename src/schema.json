@@ -28,13 +28,7 @@
                   "type": "string"
                 }
               },
-              "area": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "city": {
+              "city": { // city or area
                 "type": "array",
                 "items": {
                   "type": "string"

@@ -8,27 +8,20 @@ use JsonSchema\Validator;
 class queryBuilder
 {
 
-    public static function validateJsonSchema($jsonData, $type = 'criterias')
+    public static function validateJsonSchema($jsonData)
     {
-
-
-        var_dump("file://schema.json#definitions/{$type}");
-
+        $schemapath = $source = str_replace('\\', '/', realpath(__DIR__ . '/../sources/schema.json'));
         $jsonSchema = <<<JSON
 {
-    "\$ref":  "file://schema.json#/definitions/criterias"
+    "\$ref":  "file://{$schemapath}#/definitions/criterias"
 }
 
 JSON;
 
-//        var_dump($jsonSchema);die();
-//        var_dump(json_decode($jsonSchema));die();
-
-var_dump( json_decode($jsonSchema));
         $validator = new Validator();
+        $arrayData = json_decode($jsonData);
 
-//        $arrayData = json_decode($jsonData);
-        $validator->validate($jsonData, json_decode($jsonSchema));
+        $validator->validate($arrayData, json_decode($jsonSchema,true));
 
         $result['isSuccess'] = true;
 
@@ -66,26 +59,35 @@ var_dump( json_decode($jsonSchema));
                                 [3, "query"]
                         ]
                     ]
-                ]]]
+                ]
+                ]
+            ]
         ];
         return $baseQuery;
     }
 
     public static function buildSearchQuery($criterias)
     {
+        $criterias = json_decode($criterias);
         $baseQuery = self::baseQuery();
 
         foreach ($criterias as $key => $criteria) {
             foreach ($criteria as $value) {
-                if ($key == "job") {
-//                    $baseQuery["query"]["bool"]["must"]["match"]["job"]["fuzziness"][]["query"] = $value;
+                if ($criterias["job"] == "job") {
+//                    if (count($value) >= 2)
+//                    {
+//                        $baseQuery["query"]["bool"]["must"]["bool"]["minimum_should_match"][1]["should"][]["match"][$key]["fuzziness"]["AUTO"]["minimum_should_match"]["2<75%"]["prefix_lenght"][3]["query"] = $value;
+//                    }
+//                    else{
+//                        $baseQuery["query"]["bool"]["must"] = $value;
+//                    }
                 } else {
                     $baseQuery["query"]["bool"]["filter"]["bool"]['must'][]['term'][$key] = $value;
                 }
             }
         }
 
-        return $baseQuery;
+        return json_encode($baseQuery);
     }
 
 

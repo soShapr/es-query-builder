@@ -25,12 +25,6 @@ Feature: Search
     And i submit the search form
     Then i should see the results
 
-  Scenario: i write a area search
-    Given i am in the 'area' input
-    When i write an 'area' name
-    And i submit the search form
-    Then i should see the results
-
   Scenario: i write a country search
     Given i am in the 'country' input
     When i write an 'country' name
@@ -58,12 +52,6 @@ Feature: Search
   Scenario: i write two city search
     Given i am in the 'city' input
     When i write two 'city' names
-    And i submit the search form
-    Then i should see the results
-
-  Scenario: i write two area search
-    Given i am in the 'area' input
-    When i write two 'area' names
     And i submit the search form
     Then i should see the results
 
