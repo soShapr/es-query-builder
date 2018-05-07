@@ -11,6 +11,9 @@ clean:
 test:
 	vendor/bin/phpunit
 
+behat:
+	vendor/bin/behat
+
 test-phar: package
 	[ -f build/artifacts/behat.phar ] || (cd build/artifacts && \
 	wget https://github.com/Behat/Behat/releases/download/v3.0.15/behat.phar)
