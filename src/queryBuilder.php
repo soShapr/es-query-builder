@@ -82,7 +82,7 @@ class queryBuilder
         $baseCriteriasConfig = self::getBaseCriteriasConfig();
         $ar = [];
         foreach ($values as $v) {
-            $ar['should'][] = self::$baseCriteriasConfig[$key]($key, $v);
+            $ar['should'][] =self::{$baseCriteriasConfig[$key]}($key, $v);
         }
 
         $ar["minimum_should_match"] = 1;
