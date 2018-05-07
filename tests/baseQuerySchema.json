@@ -1,0 +1,151 @@
+{
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "definitions": {
+    "matchprops": {
+      "required": [
+        "match"
+       ],
+      "properties": {
+        "match": {
+          "type": "object",
+          "patternProperties": {
+            ".*": {
+              "required": [
+                "fuzziness",
+                "prefix_length",
+                "query",
+                "minimum_should_match"
+              ],
+              "type": "object",
+              "properties": {
+                "fuzziness": {
+                  "type": "string",
+                  "title": "The Fuzziness Schema ",
+                  "default": "AUTO",
+                  "examples": [
+                    "AUTO"
+                  ]
+                },
+                "minimum_should_match": {
+                  "type": "string",
+                  "title": "The Minimum_should_match Schema ",
+                  "default": "2<75%",
+                  "examples": [
+                    "2<75%"
+                  ]
+                },
+                "prefix_length": {
+                  "type": "integer",
+                  "title": "The Prefix_length Schema ",
+                  "default": 0,
+                  "examples": [
+                    3
+                  ]
+                },
+                "query": {
+                  "type": "string",
+                  "title": "The Query Schema ",
+                  "default": "",
+                  "examples": [
+                    "student"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "query": {
+      "type": "object",
+      "properties": {
+        "bool": {
+          "type": "object",
+          "properties": {
+            "filter": {
+              "type": "object",
+              "properties": {
+                "bool": {
+                  "type": "object",
+                  "properties": {
+                    "must": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "bool": {
+                            "type": "object",
+                            "properties": {
+                              "minimum_should_match": {
+                                "type": "integer",
+                                "title": "The Minimum_should_match Schema ",
+                                "default": 0,
+                                "examples": [
+                                  1
+                                ]
+                              },
+                              "should": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "term": {
+                                      "type": "object",
+                                      "properties": {
+                                        "goal": {
+                                          "type": "string",
+                                          "title": "The Goal Schema ",
+                                          "default": "",
+                                          "examples": [
+                                            "student"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "must": {
+              "type": "object",
+              "properties": {
+                "bool": {
+                  "type": "object",
+                  "properties": {
+                    "minimum_should_match": {
+                      "type": "integer",
+                      "title": "The Minimum_should_match Schema ",
+                      "default": 0,
+                      "examples": [
+                        1
+                      ]
+                    },
+                    "should": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "$ref": "#definitions/matchprops"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

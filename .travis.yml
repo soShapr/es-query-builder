@@ -29,6 +29,7 @@ install:
 
 script:
   - make test
+  - make behat
 
 after_success:
   - 'if [ $(phpenv version-name) == "7.1" ]; then bash <(curl -s https://codecov.io/bash); fi'
