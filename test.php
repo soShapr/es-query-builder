@@ -9,25 +9,27 @@ ini_set("log_errors", 1);
 ini_set("error_log", "php-error.log");
 
 use esQueryBuilder\queryBuilder;
+use Symfony\Component\Yaml\Yaml;
 
-$data = <<<JSON
-  {
-      "criterias": {
-        "job": [
-          "student",
-          "loleur"
-        ],
-        "goal": [
-           "janpier"
-        ]
-      }
-    }
-JSON;
+$criterias = json_decode('{
+"criterias": {
+    "country": [
+        "France"
+      ],
+      "tag": [
+        "Startups",
+        "dev"
+      ],
+      "goal": [
+        "bull",
+        "shit"
+      ],
+      "job":[
+          "doctor",
+          "actor"
+      ]
+}
+}', true);
 
-
-
-
-//echo json_encode(queryBuilder::baseMatchQueryTemplate("job","loleur"),1);
-
-// Instantiate an Amazon S3 client.
-echo queryBuilder::getJsonSearchQuery(json_decode($data,1));
+$my_query_builder = new queryBuilder("C:/Users/paul/Documents/Paul/es-query-builder/conf.yml", "879462");  // Un second personnage
+echo json_encode($my_query_builder->construct_body_query($criterias));
