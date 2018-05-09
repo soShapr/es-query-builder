@@ -20,10 +20,12 @@ Sandbox script
 
 Test library
 
-`vendor/bin/phpunit`
+`vendor/bin/phpunit.bat`
+
+Test Behat 
 
 
-
+`vendor/bin/behat.bat`
 
 
 
