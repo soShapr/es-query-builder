@@ -51,7 +51,7 @@ class queryBuilder
     public static function baseQuery()
     {
         $baseQuery = [
-            '_source' => ['fk_node_id']
+            '_source' => ['node_id']
         ];
 
         return $baseQuery;
