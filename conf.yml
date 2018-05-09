@@ -1,0 +1,41 @@
+"agg_scores_modes":
+  "score_mode": "sum"
+  "boost_mode": "sum"
+
+"full_text_params":
+  "job":
+    "fuzziness": "AUTO"
+    "minimum_should_match": "2<75%"
+    "prefix_length": 3
+    "zero_terms_query": "all"
+    "analyzer": "shapr_analyzer_job_en"
+    "boost": 1
+  "tag":
+    "fuzziness": "AUTO"
+    "prefix_length": 3
+    "analyzer": "shapr_analyzer_tag_en"
+    "boost": 1
+
+"function_score_params":
+  "weights":
+    "lastactivity_at": 2
+    "random": 0.1
+    "ba_nb_meetpending": 5
+    "ab_meetpending_id": 3
+    "ba_meetrefuse_id": -1
+    "ab_meetrefuse_id": -1
+    "ba_meetpending_id": -1
+
+  "options":
+    "lastactivity_at":
+      "method": "gauss"
+      "scale": "5d"
+      "offset": "2d"
+      "decay": 0.5
+    "ba_nb_meetpending":
+      "factor": 1
+      "modifier": "reciprocal"
+      "missing": 1
+
+"scored_fields" : ["job"]
+"ranking_fields": ["ab_meetpending_id", "ba_meetrefuse_id", "ab_meetrefuse_id", "ba_meetpending_id"]
