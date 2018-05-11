@@ -11,6 +11,7 @@ ini_set("error_log", "php-error.log");
 use esQueryBuilder\queryBuilder;
 use Symfony\Component\Yaml\Yaml;
 
+
 $criterias = json_decode('{
 "criterias": {
     "country": [
@@ -31,5 +32,6 @@ $criterias = json_decode('{
 }
 }', true);
 
-$my_query_builder = new queryBuilder("C:/Users/paul/Documents/Paul/es-query-builder/conf.yml", "879462");  // Un second personnage
-echo json_encode($my_query_builder->construct_body_query($criterias));
+
+$my_request = queryBuilder::constructBodyQuery("11111", $criterias);
+echo json_encode($my_request, true);
