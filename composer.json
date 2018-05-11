@@ -18,7 +18,8 @@
     "require": {
         "php": ">=5.5.10",
         "behat/behat": "^3.4",
-        "justinrainbow/json-schema": "^5.2"
+        "justinrainbow/json-schema": "^5.2",
+        "mustache/mustache": ">=2.12.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8.35|^5.4.3"
