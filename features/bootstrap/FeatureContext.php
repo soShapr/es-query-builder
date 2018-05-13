@@ -44,7 +44,11 @@ class FeatureContext implements Context
 
     }
 
-    public static function fillTemplate($response){
+    /**
+     * @param $response
+     * @return mixed|string
+     */
+    public static function fillTemplate(PyStringNode $response){
         // load configuration file in source folder
         $conf_path = str_replace('\\', '/', realpath(__DIR__. '/../../src') . DIRECTORY_SEPARATOR . "conf.yml");
         $conf = Yaml::parse(file_get_contents($conf_path));
