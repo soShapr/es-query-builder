@@ -6,12 +6,10 @@
  * Time: 19:20
  */
 
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use esQueryBuilder\queryBuilder;
 use Symfony\Component\Yaml\Yaml;
-use Mustache_Engine;
 
 
 class FeatureContext implements Context

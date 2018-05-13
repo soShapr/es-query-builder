@@ -28,7 +28,6 @@ install:
   - travis_retry composer update $COMPOSER_OPTS --no-interaction --prefer-source
 
 script:
-  - make test
   - make behat
 
 after_success:
