@@ -278,11 +278,11 @@ class queryBuilder
     }
 
     /**
-     * @param $requester_id
-     * @param $criterias
-	 * @param 0 $from
-	 * @param 20 $size
-	 * @param $criterias
+     * @param     $requester_id
+     * @param     $criterias
+     * @param int $from
+     * @param int $size
+     *
      * @return array
      * @throws \Exception
      */
@@ -312,15 +312,16 @@ class queryBuilder
     }
 
     /**
-     * @param $requester_id
-     * @param $criterias
-	 * @param 0 $from
-	 * @param 20 $size
+     * @param     $requester_id
+     * @param     $criterias
+     * @param int $from
+     * @param int $size
+     *
      * @return string
      * @throws \Exception
      */
     public static function buildSearchQueryJson($requester_id, $criterias, $from=0, $size=20){
-        return json_encode(self::buildSearchQuery($requester_id, $criterias, $from=$from, $size=$size), true);
+        return json_encode(self::buildSearchQuery($requester_id, $criterias, $from, $size), true);
     }
 
 }
