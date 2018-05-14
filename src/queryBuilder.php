@@ -280,11 +280,13 @@ class queryBuilder
     /**
      * @param $requester_id
      * @param $criterias
+	 * @param 0 $from
+	 * @param 20 $size
+	 * @param $criterias
      * @return array
      * @throws \Exception
      */
-    public static function constructBodyQuery($requester_id, $criterias)
-    {
+    public static function buildSearchQuery($requester_id, $criterias, $from=0, $size=20){
         /*
         regroups the scored query and all the filters to form the main query. 
         then this main query is included in the function score with all the functions applied to construct the final body query
@@ -303,20 +305,22 @@ class queryBuilder
         // get agg score modes frm conf
         $agg_modes = self::getAggModes($conf);
 
+		// construct function score
         $function_score = array("function_score" => array_merge(array("functions" => $functions["functions"], "query" => $main_query["query"]), $agg_modes));
 
-        return array("query" => $function_score, "_source" => $conf["source_fields"]);
+        return array("query" => $function_score, "_source" => $conf["source_fields"], "from"=>$from, "size"=>$size);
     }
 
     /**
      * @param $requester_id
      * @param $criterias
+	 * @param 0 $from
+	 * @param 20 $size
      * @return string
      * @throws \Exception
      */
-    public static function constructBodyQueryJson($requester_id, $criterias)
-    {
-        return json_encode(self::constructBodyQuery($requester_id, $criterias), true);
+    public static function buildSearchQueryJson($requester_id, $criterias, $from=0, $size=20){
+        return json_encode(self::buildSearchQuery($requester_id, $criterias, $from=$from, $size=$size), true);
     }
 
 }
