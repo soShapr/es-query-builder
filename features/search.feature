@@ -1,7 +1,7 @@
 Feature: Generate valid search queries with fake request id "11111"
 
   Scenario: I search for one 'job' (simple case full text match)
-    When I attempt to call the function "constructBodyQuery" with node id "11111" and JSON criterias :
+    When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
     """
     {
       "criterias": {
@@ -106,12 +106,14 @@ Feature: Generate valid search queries with fake request id "11111"
     },
     "_source": [
         "fk_node_id"
-    ]
+    ],
+    "from" : 0, 
+    "size" : 20
     }
     """
 
   Scenario: I search for one 'job' and one 'country'
-    When I attempt to call the function "constructBodyQuery" with node id "11111" and JSON criterias :
+    When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
     """
     {
       "criterias": {
@@ -226,12 +228,14 @@ Feature: Generate valid search queries with fake request id "11111"
     },
     "_source": [
         "fk_node_id"
-    ]
+    ],
+    "from" : 0, 
+    "size" : 20
     }
     """
 
   Scenario: I search for a country only (case of a match all and one clause in filter)
-    When I attempt to call the function "constructBodyQuery" with node id "11111" and JSON criterias :
+    When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
     """
     {
       "criterias": {
@@ -333,12 +337,14 @@ Feature: Generate valid search queries with fake request id "11111"
     },
     "_source": [
         "fk_node_id"
-    ]
+    ],
+    "from" : 0, 
+    "size" : 20
     }
     """
 
   Scenario: I search for a tag only (case of match in filter)
-    When I attempt to call the function "constructBodyQuery" with node id "11111" and JSON criterias :
+    When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
     """
     {
       "criterias": {
@@ -445,12 +451,14 @@ Feature: Generate valid search queries with fake request id "11111"
     },
     "_source": [
         "fk_node_id"
-    ]
+    ],
+    "from" : 0, 
+    "size" : 20
     }
     """
 
   Scenario: I search for multiple criterias including full text in filter and scored queries
-    When I attempt to call the function "constructBodyQuery" with node id "11111" and JSON criterias :
+    When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
     """
     {
       "criterias": {
@@ -654,6 +662,8 @@ Feature: Generate valid search queries with fake request id "11111"
     },
     "_source": [
         "fk_node_id"
-    ]
+    ],
+    "from" : 0, 
+    "size" : 20
     }
     """
