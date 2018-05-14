@@ -33,5 +33,5 @@ $criterias = json_decode('{
 }', true);
 
 
-$my_request = queryBuilder::constructBodyQuery("11111", $criterias);
-echo json_encode($my_request, true);
+$my_request = queryBuilder::buildSearchQuery("11111", $criterias);
+var_dump(json_encode($my_request, true));
