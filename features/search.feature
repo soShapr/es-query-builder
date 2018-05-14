@@ -105,7 +105,7 @@ Feature: Generate valid search queries with fake request id "11111"
         }
     },
     "_source": [
-        "fk_node_id"
+        "node_id"
     ],
     "from" : 0, 
     "size" : 20
@@ -227,7 +227,7 @@ Feature: Generate valid search queries with fake request id "11111"
         }
     },
     "_source": [
-        "fk_node_id"
+        "node_id"
     ],
     "from" : 0, 
     "size" : 20
@@ -336,7 +336,7 @@ Feature: Generate valid search queries with fake request id "11111"
         }
     },
     "_source": [
-        "fk_node_id"
+        "node_id"
     ],
     "from" : 0, 
     "size" : 20
@@ -450,7 +450,7 @@ Feature: Generate valid search queries with fake request id "11111"
         }
     },
     "_source": [
-        "fk_node_id"
+        "node_id"
     ],
     "from" : 0, 
     "size" : 20
@@ -661,7 +661,7 @@ Feature: Generate valid search queries with fake request id "11111"
         }
     },
     "_source": [
-        "fk_node_id"
+        "node_id"
     ],
     "from" : 0, 
     "size" : 20
