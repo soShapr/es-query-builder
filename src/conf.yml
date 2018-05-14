@@ -39,4 +39,4 @@
 
 "scored_fields" : ["job"]
 "ranking_fields": ["ab_meetpending_id", "ba_meetrefuse_id", "ab_meetrefuse_id", "ba_meetpending_id"]
-"source_fields": ["fk_node_id"]
+"source_fields": ["node_id"]
