@@ -16,11 +16,12 @@
          }
     ],
     "require": {
-        "php": ">=5.5.10",
-        "behat/behat": "^3.4",
-        "justinrainbow/json-schema": "^5.2"
+        "php": ">=5.5",
+        "justinrainbow/json-schema": "^5.2",
+        "mustache/mustache": ">=2.12.0"
     },
     "require-dev": {
+        "behat/behat": "^3.4",
         "phpunit/phpunit": "^4.8.35|^5.4.3"
     },
     "autoload": {
