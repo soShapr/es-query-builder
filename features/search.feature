@@ -667,3 +667,85 @@ Feature: Generate valid search queries with fake request id "11111"
     "size" : 20
     }
     """
+
+  Scenario: I search for autocompletion with field "tag"
+    When I attempt to call the function "buildSearchQueryAutocompletion" with field "tag" and text "Star" :
+    """
+    """
+    Then I expect the following JSON result :
+    """
+    {
+    "_source": [
+        "tag"
+    ],
+    "suggest": {
+        "tag_suggest": {
+            "prefix": "Star",
+            "completion": {
+                "field": "{{autocompletion_params|tag|index_name}}",
+                "analyzer": "{{autocompletion_params|tag|params|analyzer}}",
+                "size": {{autocompletion_params|tag|params|size}},
+                "fuzzy": {
+                    "fuzziness": {{autocompletion_params|tag|params|fuzzy|fuzziness}},
+                    "prefix_length": {{autocompletion_params|tag|params|fuzzy|prefix_length}}
+                }
+            }
+        }
+    }
+    }
+    """
+
+  Scenario: I search for autocompletion with field "job"
+    When I attempt to call the function "buildSearchQueryAutocompletion" with field "job" and text "Prod" :
+    """
+    """
+    Then I expect the following JSON result :
+    """
+    {
+    "suggest": {
+        "job_suggest": {
+        "completion": {
+            "analyzer": "simple",
+            "size": 5,
+            "fuzzy": {
+                "fuzziness": 1,
+                "prefix_length": 3
+            },
+            "field": "job_suggest"
+        },
+        "prefix": "Prod"
+        }
+    },
+    "_source": [
+        "job"
+    ]
+    }
+    """
+
+  Scenario: I search for autocompletion with field "place"
+    When I attempt to call the function "buildSearchQueryAutocompletion" with field "place" and text "New" :
+    """
+    """
+    Then I expect the following JSON result :
+    """
+    {
+    "suggest": {
+        "place_suggest": {
+        "completion": {
+            "analyzer": "simple",
+            "size": 5,
+            "fuzzy": {
+                "fuzziness": 1,
+                "prefix_length": 3
+            },
+            "field": "place_suggest"
+        },
+        "prefix": "New"
+        }
+    },
+    "_source": [
+        "place",
+        "type_place"
+    ]
+    }
+    """
