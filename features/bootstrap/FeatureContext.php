@@ -29,6 +29,18 @@ class FeatureContext implements Context
     }
 
     /**
+     * @When I attempt to call the function :functionToCall with field :field and text :text :
+     * @param $functionToCall
+     * @param $field
+     * @param $text
+     */
+    public function iAttemptToCallTheFunctionWithFieldAndText($functionToCall, $field, $text)
+    {
+        $this->getQueryResult = queryBuilder::$functionToCall($field, $text);
+
+    }
+
+    /**
      * @Then /^I expect the following JSON result :$/
      * @param PyStringNode $response
      */
@@ -38,7 +50,7 @@ class FeatureContext implements Context
 
         // casting problem with php. to transform std class to array in nested object, one needs to use:
         // json_decode(json_encode(<NESTED ARRAY>, JSON_FORCE_OBJECT), true)
-            PHPUnit_Framework_Assert::assertEquals(
+        PHPUnit_Framework_Assert::assertEquals(
             json_decode(json_encode($this->getQueryResult, JSON_FORCE_OBJECT), true),
             $responseCompleted);
 
@@ -77,7 +89,12 @@ class FeatureContext implements Context
                                    "function_score_params|options|lastactivity_at|offset",
                                    "function_score_params|options|lastactivity_at|decay",
                                    "function_score_params|options|ba_nb_meetpending|factor",
-                                   "function_score_params|options|ba_nb_meetpending|modifier");
+                                   "function_score_params|options|ba_nb_meetpending|modifier",
+                                   "autocompletion_params|tag|index_name",
+                                   "autocompletion_params|tag|params|analyzer",
+                                   "autocompletion_params|tag|params|size",
+                                   "autocompletion_params|tag|params|fuzzy|fuzziness",
+                                   "autocompletion_params|tag|params|fuzzy|prefix_length");
         // construct array that will be used to fill in the template
         $mustacheInputRender = array();
         foreach($mustacheFiedNames as $key){
@@ -93,6 +110,7 @@ class FeatureContext implements Context
         // replace keys by the conf values via mustache object
         $m = new Mustache_Engine;
         $responseCompleted = $m->render($response->getRaw(), $mustacheInputRender);
+
         // replace html special cases to match elasticsearch expectations
         $responseCompleted = str_replace(array('&lt;','&gt;'), array('<', '>'), $responseCompleted);
         $responseCompleted = json_decode($responseCompleted, true);
