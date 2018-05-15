@@ -40,3 +40,32 @@
 "scored_fields" : ["job"]
 "ranking_fields": ["ab_meetpending_id", "ba_meetrefuse_id", "ab_meetrefuse_id", "ba_meetpending_id"]
 "source_fields": ["node_id"]
+
+"autocompletion_params":
+  "tag":
+    "index_name": "tag_suggest"
+    "source_fields": ["tag"]
+    "params":
+      "analyzer": "simple"
+      "size": 5
+      "fuzzy":
+        "fuzziness": 1
+        "prefix_length": 3
+  "job":
+    "index_name": "job_suggest"
+    "source_fields": ["job"]
+    "params":
+      "analyzer": "simple"
+      "size": 5
+      "fuzzy":
+        "fuzziness": 1
+        "prefix_length": 3
+  "place":
+    "index_name": "place_suggest"
+    "source_fields": ["place", "type_place"]    
+    "params":
+      "analyzer": "simple"
+      "size": 5
+      "fuzzy":
+        "fuzziness": 1
+        "prefix_length": 3
