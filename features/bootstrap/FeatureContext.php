@@ -29,7 +29,7 @@ class FeatureContext implements Context
     }
 
     /**
-     * @When I attempt to call the function :functionToCall with field :field and text :text :
+     * @When I attempt to call the function :functionToCall with field :field and text :text
      * @param $functionToCall
      * @param $field
      * @param $text

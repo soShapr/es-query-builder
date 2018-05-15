@@ -669,9 +669,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
 
   Scenario: I search for autocompletion with field "tag"
-    When I attempt to call the function "buildSearchQueryAutocompletion" with field "tag" and text "Star" :
-    """
-    """
+    When I attempt to call the function "buildSearchQueryAutocompletion" with field "tag" and text "Star"
     Then I expect the following JSON result :
     """
     {
@@ -696,9 +694,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
 
   Scenario: I search for autocompletion with field "job"
-    When I attempt to call the function "buildSearchQueryAutocompletion" with field "job" and text "Prod" :
-    """
-    """
+    When I attempt to call the function "buildSearchQueryAutocompletion" with field "job" and text "Prod"
     Then I expect the following JSON result :
     """
     {
@@ -723,9 +719,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
 
   Scenario: I search for autocompletion with field "place"
-    When I attempt to call the function "buildSearchQueryAutocompletion" with field "place" and text "New" :
-    """
-    """
+    When I attempt to call the function "buildSearchQueryAutocompletion" with field "place" and text "New"
     Then I expect the following JSON result :
     """
     {
