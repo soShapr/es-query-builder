@@ -37,7 +37,7 @@ $criterias = json_decode('{
 
 
 // body search query example
-$my_request = queryBuilder::buildSearchQuery("11111", $criterias, $from=10, $size=30);
+$my_request = queryBuilder::buildSearchQuery("11111", $criterias, $from=10, $size=30, $explain=true);
 var_dump(json_encode($my_request, true));
 
 // autocompletion example using place
