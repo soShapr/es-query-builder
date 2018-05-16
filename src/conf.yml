@@ -5,14 +5,14 @@
 "full_text_params":
   "job":
     "fuzziness": "AUTO"                 # an edit distance based on the length of the job
-    "prefix_length": 0                  # number of characters at the begining that should NOT be fuzzified
+    "prefix_length": 3                  # number of characters at the begining that should NOT be fuzzified
     "minimum_should_match": "2<67%"     # min match set to 2/3 tokens
     "zero_terms_query": "all"
     "analyzer": "shapr_analyzer_job_en"
     "boost": 1
   "tag":
     "fuzziness": "AUTO"
-    "prefix_length": 0
+    "prefix_length": 3
     "analyzer": "shapr_analyzer_tag_en"
     "boost": 1
 
@@ -69,5 +69,5 @@
         "fuzziness": 1
         "prefix_length": 3
 
-"source_fields": ["node_id", "job"]
-"job_protected_terms": ["plane", "plant"]   # terms from the list should not be fuzzified
+"source_fields": ["node_id"]
+"job_protected_terms": ["plant", "plane"]   # terms from the list should not be fuzzified
