@@ -278,10 +278,12 @@ class queryBuilder
     }
 
     /**
-     * @param     $requester_id
-     * @param     $criterias
-     * @param int $from
-     * @param int $size
+     * @param      $requester_id
+     * @param      $criterias
+     * @param int  $from
+     * @param int  $size
+     *
+     * @param bool $explain
      *
      * @return array
      * @throws \Exception
@@ -342,10 +344,12 @@ class queryBuilder
     }
 
     /**
-     * @param     $requester_id
-     * @param     $criterias
-     * @param int $from
-     * @param int $size
+     * @param      $requester_id
+     * @param      $criterias
+     * @param int  $from
+     * @param int  $size
+     *
+     * @param bool $explain
      *
      * @return string
      * @throws \Exception
