@@ -13,7 +13,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
     Then I expect the following JSON result :
      """
-    {
+    {"explain":false,
     "query": {
         "function_score": {
         "functions": [
@@ -128,7 +128,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
     Then I expect the following JSON result :
      """
-    {
+    {"explain":false,
     "query": {
         "function_score": {
         "functions": [
@@ -247,7 +247,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
     Then I expect the following JSON result :
      """
-    {
+    {"explain":false,
     "query": {
         "function_score": {
         "functions": [
@@ -356,7 +356,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
     Then I expect the following JSON result :
      """
-    {
+    {"explain":false,
     "query": {
         "function_score": {
         "functions": [
@@ -486,7 +486,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
     Then I expect the following JSON result :
      """
-    {
+    {"explain":false,
     "query": {
         "function_score": {
         "functions": [
@@ -677,7 +677,7 @@ Feature: Generate valid search queries with fake request id "11111"
         "tag"
     ],
     "suggest": {
-        "tag_suggest": {
+        "{{autocompletion_params|tag|index_name}}": {
             "prefix": "Star",
             "completion": {
                 "field": "{{autocompletion_params|tag|index_name}}",
@@ -699,15 +699,15 @@ Feature: Generate valid search queries with fake request id "11111"
     """
     {
     "suggest": {
-        "job_suggest": {
+        "{{autocompletion_params|job|index_name}}": {
         "completion": {
-            "analyzer": "simple",
-            "size": 5,
+            "analyzer": "{{autocompletion_params|job|params|analyzer}}",
+            "size": {{autocompletion_params|job|params|size}},
             "fuzzy": {
-                "fuzziness": 1,
-                "prefix_length": 3
+                "fuzziness": {{autocompletion_params|job|params|fuzzy|fuzziness}},
+                "prefix_length": {{autocompletion_params|job|params|fuzzy|prefix_length}}
             },
-            "field": "job_suggest"
+            "field": "{{autocompletion_params|job|index_name}}"
         },
         "prefix": "Prod"
         }
@@ -724,13 +724,13 @@ Feature: Generate valid search queries with fake request id "11111"
     """
     {
     "suggest": {
-        "place_suggest": {
+        "{{autocompletion_params|place|index_name}}": {
         "completion": {
-            "analyzer": "simple",
-            "size": 5,
+            "analyzer": "{{autocompletion_params|place|params|analyzer}}",
+            "size": {{autocompletion_params|place|params|size}},
             "fuzzy": {
-                "fuzziness": 1,
-                "prefix_length": 3
+                "fuzziness": {{autocompletion_params|place|params|fuzzy|fuzziness}},
+                "prefix_length": {{autocompletion_params|place|params|fuzzy|prefix_length}}
             },
             "field": "place_suggest"
         },
