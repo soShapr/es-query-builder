@@ -278,15 +278,17 @@ class queryBuilder
     }
 
     /**
-     * @param     $requester_id
-     * @param     $criterias
-     * @param int $from
-     * @param int $size
+     * @param      $requester_id
+     * @param      $criterias
+     * @param int  $from
+     * @param int  $size
+     *
+     * @param bool $explain
      *
      * @return array
      * @throws \Exception
      */
-    public static function buildSearchQuery($requester_id, $criterias, $from=0, $size=20){
+    public static function buildSearchQuery($requester_id, $criterias, $from=0, $size=20, $explain=false){
         /*
         regroups the scored query and all the filters to form the main query. 
         then this main query is included in the function score with all the functions applied to construct the final body query
@@ -308,7 +310,7 @@ class queryBuilder
 		// construct function score
         $function_score = array("function_score" => array_merge(array("functions" => $functions["functions"], "query" => $main_query["query"]), $agg_modes));
 
-        return array("query" => $function_score, "_source" => $conf["source_fields"], "from"=>$from, "size"=>$size);
+        return array("query" => $function_score, "_source" => $conf["source_fields"], "from"=>$from, "size"=>$size, "explain"=>$explain);
     }
 
     /**
@@ -342,16 +344,18 @@ class queryBuilder
     }
 
     /**
-     * @param     $requester_id
-     * @param     $criterias
-     * @param int $from
-     * @param int $size
+     * @param      $requester_id
+     * @param      $criterias
+     * @param int  $from
+     * @param int  $size
+     *
+     * @param bool $explain
      *
      * @return string
      * @throws \Exception
      */
-    public static function buildSearchQueryJson($requester_id, $criterias, $from=0, $size=20){
-        return json_encode(self::buildSearchQuery($requester_id, $criterias, $from, $size), true);
+    public static function buildSearchQueryJson($requester_id, $criterias, $from=0, $size=20, $explain=false){
+        return json_encode(self::buildSearchQuery($requester_id, $criterias, $from, $size, $explain), true);
     }
 
     /**

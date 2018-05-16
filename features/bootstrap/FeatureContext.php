@@ -94,7 +94,17 @@ class FeatureContext implements Context
                                    "autocompletion_params|tag|params|analyzer",
                                    "autocompletion_params|tag|params|size",
                                    "autocompletion_params|tag|params|fuzzy|fuzziness",
-                                   "autocompletion_params|tag|params|fuzzy|prefix_length");
+                                   "autocompletion_params|tag|params|fuzzy|prefix_length",
+                                   "autocompletion_params|job|index_name",
+                                   "autocompletion_params|job|params|analyzer",
+                                   "autocompletion_params|job|params|size",
+                                   "autocompletion_params|job|params|fuzzy|fuzziness",
+                                   "autocompletion_params|job|params|fuzzy|prefix_length",
+                                   "autocompletion_params|place|index_name",
+                                   "autocompletion_params|place|params|analyzer",
+                                   "autocompletion_params|place|params|size",
+                                   "autocompletion_params|place|params|fuzzy|fuzziness",
+                                   "autocompletion_params|place|params|fuzzy|prefix_length");
         // construct array that will be used to fill in the template
         $mustacheInputRender = array();
         foreach($mustacheFiedNames as $key){
