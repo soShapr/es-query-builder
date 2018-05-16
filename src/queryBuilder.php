@@ -312,6 +312,36 @@ class queryBuilder
     }
 
     /**
+     * @param     $field
+     * @param     $text
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public static function buildSearchQueryAutocompletion($field, $text){
+        /*
+        suggest propositions for the field including the string "text". 
+        */
+
+        // path to configuration file
+        $conf_path = str_replace('\\', '/', realpath(__DIR__) . DIRECTORY_SEPARATOR . "conf.yml");
+        $conf = Yaml::parse(file_get_contents($conf_path));
+        // test if an autocompletion has been set for this field
+        if (array_key_exists($field, $conf["autocompletion_params"]) == FALSE) {
+            throw new \Exception('No autocompletion set for this field.');
+        }
+        // get autocompletion data from configuration file
+        $index_name = $conf["autocompletion_params"][$field]["index_name"];
+        $autocompletion_params = $conf["autocompletion_params"][$field]["params"];
+
+        // construct the autocompletion query
+        $completion = array("completion"=>array_merge($autocompletion_params, array("field"=>$index_name)));
+        $autocompletion_query = array("suggest"=>array($index_name=>array_merge($completion, array("prefix"=>$text))));
+
+        return array_merge($autocompletion_query, array("_source"=>$conf["autocompletion_params"][$field]["source_fields"]));
+    }
+
+    /**
      * @param     $requester_id
      * @param     $criterias
      * @param int $from
@@ -322,6 +352,17 @@ class queryBuilder
      */
     public static function buildSearchQueryJson($requester_id, $criterias, $from=0, $size=20){
         return json_encode(self::buildSearchQuery($requester_id, $criterias, $from, $size), true);
+    }
+
+    /**
+     * @param     $field
+     * @param     $text
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public static function buildSearchQueryAutocompletionJson($field, $text){
+        return json_encode(self::buildSearchQueryAutocompletion($field, $text), true);
     }
 
 }

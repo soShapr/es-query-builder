@@ -28,10 +28,18 @@ $criterias = json_decode('{
       "job":[
           "doctor",
           "actor"
+      ],
+      "city":[
+        "paris"
       ]
 }
 }', true);
 
 
-$my_request = queryBuilder::buildSearchQuery("11111", $criterias);
+// body search query example
+$my_request = queryBuilder::buildSearchQuery("11111", $criterias, $from=10, $size=30);
+var_dump(json_encode($my_request, true));
+
+// autocompletion example using place
+$my_request = queryBuilder::buildSearchQueryAutocompletion("place", "New");
 var_dump(json_encode($my_request, true));
