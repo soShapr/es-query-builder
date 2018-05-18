@@ -62,7 +62,7 @@
         "prefix_length": 3
   "place":
     "index_name": "place_suggest"
-    "source_fields": ["place", "type_place"]    
+    "source_fields": ["place", "type"]
     "params":
       "analyzer": "simple"
       "size": 5
