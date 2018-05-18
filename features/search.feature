@@ -739,7 +739,7 @@ Feature: Generate valid search queries with fake request id "11111"
     },
     "_source": [
         "place",
-        "type_place"
+        "type"
     ]
     }
     """
