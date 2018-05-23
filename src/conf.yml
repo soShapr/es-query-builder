@@ -4,9 +4,9 @@
 
 "full_text_params":
   "job":
-    "fuzziness": "AUTO"
-    "minimum_should_match": "2<75%"
-    "prefix_length": 3
+    "fuzziness": "AUTO"                 # an edit distance based on the length of the job
+    "prefix_length": 3                  # number of characters at the begining that should NOT be fuzzified
+    "minimum_should_match": "2<67%"     # min match set to 2/3 tokens
     "zero_terms_query": "all"
     "analyzer": "shapr_analyzer_job_en"
     "boost": 1
@@ -39,7 +39,6 @@
 
 "scored_fields" : ["job"]
 "ranking_fields": ["ab_meetpending_id", "ba_meetrefuse_id", "ab_meetrefuse_id", "ba_meetpending_id"]
-"source_fields": ["node_id"]
 
 "autocompletion_params":
   "tag":
@@ -69,3 +68,6 @@
       "fuzzy":
         "fuzziness": 1
         "prefix_length": 3
+
+"source_fields": ["node_id"]
+"job_protected_terms": ["plant", "plane"]   # terms from the list should not be fuzzified

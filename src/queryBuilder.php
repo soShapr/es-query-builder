@@ -113,6 +113,10 @@ class queryBuilder
         }
         // get specific params for key provided
         $full_text_key_params = $conf["full_text_params"][$key];
+		// disable fuzzinness for protected terms (list psecified in config file)
+		if (in_array($value, $conf["job_protected_terms"]))
+			$full_text_key_params["fuzziness"] = 0;
+		
         // add query and boost if provided
         $full_text_key_params = array_merge($full_text_key_params, array("query" => $value));
 
