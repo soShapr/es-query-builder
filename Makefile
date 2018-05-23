@@ -12,7 +12,7 @@ test:
 	vendor/bin/phpunit
 
 behat:
-	vendor/bin/behat
+	vendor/bin/behat --format=progress
 
 test-phar: package
 	[ -f build/artifacts/behat.phar ] || (cd build/artifacts && \

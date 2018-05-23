@@ -1,0 +1,35 @@
+default:
+  extensions:
+    LeanPHP\Behat\CodeCoverage\Extension:
+      # http auth (optional)
+      auth:        ~
+      # select which driver to use when gatherig coverage data
+      drivers:
+        - local     # local Xdebug driver
+      # filter options
+      filter:
+        forceCoversAnnotation:                false
+        mapTestClassNameToCoveredClassName:   false
+        whitelist:
+          addUncoveredFilesFromWhitelist:     true
+          processUncoveredFilesFromWhitelist: false
+          include:
+            directories:
+              'src':
+                prefix: 'src'
+              'tests':
+                prefix: 'src'
+        blacklist:
+          include:
+            directories:
+              'vendor':
+                prefix: 'vendor'
+              'features':
+                prefix: 'features'
+      # report configuration
+      report:
+        # report format (html, clover, php, text)
+        format:    clover
+        # report options
+        options:
+          target: coverage.xml
