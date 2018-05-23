@@ -24,6 +24,8 @@ default:
             directories:
               'vendor':
                 prefix: 'vendor'
+              'features':
+                prefix: 'features'
       # report configuration
       report:
         # report format (html, clover, php, text)
