@@ -118,7 +118,7 @@ Feature: Generate valid search queries with fake request id "11111"
     {
       "criterias": {
         "job": [
-          "plant"
+          "maker"
         ]
       }
     }
@@ -206,7 +206,7 @@ Feature: Generate valid search queries with fake request id "11111"
                     "zero_terms_query": "{{full_text_params|job|zero_terms_query}}",
                     "analyzer": "{{full_text_params|job|analyzer}}",
                     "boost": {{full_text_params|job|boost}},
-                    "query": "plant"
+                    "query": "maker"
                 }
                 }
             }
