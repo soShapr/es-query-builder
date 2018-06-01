@@ -4,9 +4,9 @@
 
 "full_text_params":
   "job":
-    "fuzziness": "AUTO"                 # an edit distance based on the length of the job
+    "fuzziness": 1                 # an edit distance based on the length of the job
     "prefix_length": 3                  # number of characters at the begining that should NOT be fuzzified
-    "minimum_should_match": "2<67%"     # min match set to 2/3 tokens
+    "minimum_should_match": "2<76%"     # min match set to 2/3 tokens
     "zero_terms_query": "all"
     "analyzer": "shapr_analyzer_job_en"
     "boost": 1
@@ -70,4 +70,4 @@
         "prefix_length": 3
 
 "source_fields": ["node_id"]
-"job_protected_terms": ['framer', 'courtier', 'cariste', 'dancer', 'lance', 'courier', 'tender', 'cadre', 'pair', 'qhse', 'advocate', 'zone', 'investor', 'call', 'looking', 'master', 'fine', 'wine', 'medic', 'retailer', 'grant', 'cast', 'line', 'packer', 'painter', 'usher', 'chain', 'vice', 'mode', 'dental', 'charge', 'inventor', 'ramp', 'teach', 'boss', 'west', 'fraser', 'state', 'vie', 'stock', 'operation', 'baker', 'all', 'life', 'health', 'paris', 'tech', 'cafe', 'audio', 'loss', 'coursier', 'grands', 'sale', 'crafter', 'pet', 'hacker', 'film', 'commerce', 'cost', 'ecommerce', 'home', 'paie', 'moniteur', 'patient', 'sail', 'lender', 'male', 'teller', 'audit', 'care', 'post', 'host', 'carer', 'drafter', 'seller', 'car', 'shop', 'mail', 'detailer', 'export', 'mental', 'rap', 'monteur', 'sole', 'waiter', 'poet', 'test', 'booking', 'camp', 'file', 'chair', 'trade', 'parts', 'patent', 'writer', 'blogger', 'house', 'hote', 'make', 'grade', 'trades', 'expert', 'model', 'media', 'user', 'banker', 'manger', 'caviste', 'ranger', 'avocate', 'cook', 'stack', 'matter', 'horse', 'nail', 'picker', 'printer', 'uber', 'hair', 'office', 'gerant', 'operations', 'grad', 'live', 'officer', 'maker', 'part', 'park', 'wealth', 'book', 'dance', 'voice', 'stage', 'vlogger', 'trader', 'qse', 'show', 'change', 'case', 'grants', 'none', 'cake']   # terms from the list should not be fuzzified
+"job_protected_terms": ['framer', 'courtier', 'cariste', 'dancer', 'lance', 'courier', 'tender', 'cadre', 'pair', 'qhse', 'advocate', 'zone', 'investor', 'call', 'looking', 'master', 'fine', 'wine', 'medic', 'retailer', 'grant', 'cast', 'line', 'packer', 'painter', 'usher', 'chain', 'vice', 'mode', 'dental', 'charge', 'inventor', 'ramp', 'teach', 'boss', 'west', 'fraser', 'state', 'vie', 'stock', 'operation', 'baker', 'all', 'life', 'health', 'paris', 'tech', 'cafe', 'audio', 'loss', 'coursier', 'grands', 'sale', 'crafter', 'pet', 'hacker', 'film', 'commerce', 'cost', 'ecommerce', 'home', 'paie', 'moniteur', 'patient', 'sail', 'lender', 'male', 'teller', 'audit', 'care', 'post', 'host', 'carer', 'drafter', 'seller', 'car', 'shop', 'mail', 'detailer', 'export', 'mental', 'rap', 'monteur', 'sole', 'waiter', 'poet', 'test', 'booking', 'camp', 'file', 'chair', 'trade', 'parts', 'patent', 'writer', 'blogger', 'house', 'hote', 'make', 'grade', 'trades', 'expert', 'model', 'media', 'user', 'banker', 'manger', 'caviste', 'ranger', 'avocate', 'cook', 'stack', 'matter', 'horse', 'nail', 'picker', 'printer', 'uber', 'hair', 'office', 'gerant', 'operations', 'grad', 'live', 'officer', 'maker', 'part', 'park', 'wealth', 'book', 'dance', 'voice', 'stage', 'vlogger', 'trader', 'qse', 'show', 'change', 'case', 'grants', 'none', 'cake', 'scala', 'scale']   # terms from the list should not be fuzzified
