@@ -8,7 +8,7 @@
     "prefix_length": 3                  # number of characters at the begining that should NOT be fuzzified
     "minimum_should_match": "2<76%"     # min match set to 2/3 tokens
     "zero_terms_query": "all"
-    "analyzer": "shapr_analyzer_job_en"
+    "analyzer": "shapr_analyzer_job_en_search"
     "boost": 1
   "tag":
     "fuzziness": "AUTO"
