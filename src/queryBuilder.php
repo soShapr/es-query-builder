@@ -317,7 +317,7 @@ class queryBuilder
         regroups all filters. filter out results from the main query that don't satisfy these filters
         */
         $filters_array = array();
-        foreach ($criterias["criterias"] as $key => $value) {
+        foreach ($criterias as $key => $value) {
             // if field is a filter one
             if (in_array($key, $conf["scored_fields"]) == FALSE) {
                 // if the field is full-text type
@@ -362,7 +362,7 @@ class queryBuilder
         construct the scored query. the one which uses the full text field job
         */
         $scored_array = array();
-        foreach ($criterias["criterias"] as $key => $value) {
+        foreach ($criterias as $key => $value) {
             if (in_array($key, $conf["scored_fields"]) == TRUE) {
 
                 $temp_array = array();

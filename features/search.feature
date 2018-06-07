@@ -4,12 +4,10 @@ Feature: Generate valid search queries with fake request id "11111"
     When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
     """
     {
-      "criterias": {
         "job": [
           "student"
         ]
       }
-    }
     """
     Then I expect the following JSON result :
      """
@@ -116,11 +114,9 @@ Feature: Generate valid search queries with fake request id "11111"
     When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
     """
     {
-      "criterias": {
         "job": [
           "maker"
         ]
-      }
     }
     """
     Then I expect the following JSON result :
@@ -228,14 +224,12 @@ Feature: Generate valid search queries with fake request id "11111"
     When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
     """
     {
-      "criterias": {
         "job": [
           "doctor"
         ],
         "country": [
             "France"
         ]
-      }
     }
     """
     Then I expect the following JSON result :
@@ -350,11 +344,9 @@ Feature: Generate valid search queries with fake request id "11111"
     When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
     """
     {
-      "criterias": {
         "country": [
             "France"
         ]
-      }
     }
     """
     Then I expect the following JSON result :
@@ -459,11 +451,9 @@ Feature: Generate valid search queries with fake request id "11111"
     When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
     """
     {
-      "criterias": {
         "tag": [
             "Startups"
         ]
-      }
     }
     """
     Then I expect the following JSON result :
@@ -573,7 +563,6 @@ Feature: Generate valid search queries with fake request id "11111"
     When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
     """
     {
-      "criterias": {
         "job": [
           "doctor",
           "actor"
@@ -593,7 +582,6 @@ Feature: Generate valid search queries with fake request id "11111"
         "goal":[
             "Ideas & inspiration"
         ]
-      }
     }
     """
     Then I expect the following JSON result :

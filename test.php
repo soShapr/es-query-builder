@@ -13,7 +13,6 @@ use Symfony\Component\Yaml\Yaml;
 
 
 $criterias = json_decode('{
-"criterias": {
     "country": [
         "France"
       ],
@@ -32,7 +31,6 @@ $criterias = json_decode('{
       "city":[
         "paris"
       ]
-}
 }', true);
 
 
