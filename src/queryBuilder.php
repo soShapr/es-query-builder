@@ -112,7 +112,7 @@ class queryBuilder
         }
         // get specific params for key provided
         $full_text_key_params = $conf["full_text_params"][$key];
-		// disable fuzzinness for protected terms (list psecified in config file)
+	// disable fuzzinness for protected terms (list psecified in config file)
         if ( count(array_intersect(explode(" ", strtolower($value)), $conf["job_protected_terms"])) > 0 )
 			$full_text_key_params["fuzziness"] = 0;
 		
@@ -127,20 +127,42 @@ class queryBuilder
      * @param $conf
      * @return array
      */
-    public static function getRankingFiltersArray($requester_id, $conf)
+    public static function getInteractionFiltersArray($requester_id, $conf)
     {
         /*
         returns functions of function score that deals with users' interactions
         */
-        $fields = $conf["ranking_fields"];
+        $fields = $conf["interaction_fields"];
 
-        $ranking_filters_array = array();
+        $interaction_filters_array = array();
         foreach ($fields as $key) {
             $key_weight = $conf["function_score_params"]["weights"][$key];
-            array_push($ranking_filters_array, self::createTermQuery($key, $requester_id, $key_weight));
+            array_push($interaction_filters_array, self::createTermQuery($key, $requester_id, $key_weight));
         }
 
-        return $ranking_filters_array;
+        return $interaction_filters_array;
+    }
+
+    /**
+     * @param $conf
+     * @return array
+     */
+    public static function getBoostingFiltersArray($conf, $criterias)
+    {
+        /*
+        returns functions of function score that deals with users' interactions
+        */
+		$boosting_filters_array = array();
+		foreach ($criterias as $key => $value) {
+			foreach ($value as $sub_value) {
+				if ( in_array($key, $conf["boosting_fields"]) == TRUE) {
+					// The overall weight should be shared between all modalities
+					$key_weight = $conf["function_score_params"]["weights"][$key] / count($value);
+					array_push($boosting_filters_array, self::createTermQuery($key, $sub_value, $key_weight));
+				}
+			}
+		}
+        return $boosting_filters_array;
     }
 
     /**
@@ -148,7 +170,7 @@ class queryBuilder
      * @param $conf
      * @return array
      */
-    public static function getBoostingFunctions($requester_id, $conf)
+    public static function getBoostingFunctions($requester_id, $conf, $criterias)
     {
         /*
         regroups every functions of function score
@@ -157,7 +179,8 @@ class queryBuilder
         array_push($functions, self::getActivityArray($conf));
         array_push($functions, self::getRandomArray($conf));
         array_push($functions, self::getNbMeetpendingArray($conf));
-        $functions = array_merge($functions, self::getRankingFiltersArray($requester_id, $conf));
+        $functions = array_merge($functions, self::getInteractionFiltersArray($requester_id, $conf));
+	$functions = array_merge($functions, self::getBoostingFiltersArray($conf, $criterias));
 
         return array("functions" => $functions);
     }
@@ -212,7 +235,7 @@ class queryBuilder
         $filters_array = array();
         foreach ($criterias as $key => $value) {
             // if field is a filter one
-            if (in_array($key, $conf["scored_fields"]) == FALSE) {
+            if (in_array($key, $conf["match_fields"]) == FALSE & in_array($key, $conf["boosting_fields"]) == FALSE) {
                 // if the field is full-text type
                 $full_text = FALSE;
                 if (array_key_exists($key, $conf["full_text_params"])) {
@@ -256,7 +279,7 @@ class queryBuilder
         */
         $scored_array = array();
         foreach ($criterias as $key => $value) {
-            if (in_array($key, $conf["scored_fields"]) == TRUE) {
+            if (in_array($key, $conf["match_fields"]) == TRUE) {
 
                 $temp_array = array();
                 foreach ($value as $sub_value) {
@@ -306,7 +329,7 @@ class queryBuilder
         $scored_array = self::constructScoredQuery($conf, $criterias);
         $main_query = array("query" => array("bool" => array("filter" => $filters_array["filter"], "must" => $scored_array["must"])));
         // functions of the function score
-        $functions = self::getBoostingFunctions($requester_id, $conf);
+	$functions = self::getBoostingFunctions($requester_id, $conf, $criterias);
         // get agg score modes frm conf
         $agg_modes = self::getAggModes($conf);
 
