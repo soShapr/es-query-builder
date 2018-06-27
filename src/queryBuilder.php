@@ -154,10 +154,16 @@ class queryBuilder
         */
 		$boosting_filters_array = array();
 		foreach ($criterias as $key => $value) {
-			foreach ($value as $sub_value) {
-				if ( in_array($key, $conf["boosting_fields"]) == TRUE) {
-					// The overall weight should be shared between all modalities
-					$key_weight = $conf["function_score_params"]["weights"][$key] / count($value);
+			if (in_array($key, $conf["boosting_fields"]) == TRUE) {
+				// The overall weight should be shared between all modalities
+				$key_weight = $conf["function_score_params"]["weights"][$key] / count($value);
+				
+				// test if it is a full text field
+				// in this case we suppose that a field .raw has been created
+				if (array_key_exists($key, $conf["full_text_params"])) {
+					$key = $key . ".raw";
+				}
+				foreach ($value as $sub_value) {
 					array_push($boosting_filters_array, self::createTermQuery($key, $sub_value, $key_weight));
 				}
 			}
@@ -236,7 +242,7 @@ class queryBuilder
         $place_array = array();
         foreach ($criterias as $key => $value) {
             // if field is a filter one
-            if (in_array($key, $conf["match_fields"]) == FALSE & in_array($key, $conf["boosting_fields"]) == FALSE) {
+			if (in_array($key, $conf["filter_fields"]) == TRUE) {
                 // if the field is full-text type
                 $full_text = FALSE;
                 if (array_key_exists($key, $conf["full_text_params"])) {
