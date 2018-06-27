@@ -87,7 +87,7 @@ class queryBuilder
         /*
         constructs a term query
         */
-        if ($weight) {
+        if (!is_null($weight)) {
             return array("filter" => array("term" => array($key => $value)), "weight" => $weight);
         } else {
             return array("filter" => array("term" => array($key => $value)));
@@ -180,7 +180,7 @@ class queryBuilder
         array_push($functions, self::getRandomArray($conf));
         array_push($functions, self::getNbMeetpendingArray($conf));
         $functions = array_merge($functions, self::getInteractionFiltersArray($requester_id, $conf));
-	$functions = array_merge($functions, self::getBoostingFiltersArray($conf, $criterias));
+	    $functions = array_merge($functions, self::getBoostingFiltersArray($conf, $criterias));
 
         return array("functions" => $functions);
     }
@@ -271,7 +271,7 @@ class queryBuilder
 		if (count($place_array) == 1) {
             array_push($filters_array, $place_array[0]);
         }
-        
+
         if (count($filters_array) == 0) {
             $filters_array = array_merge($filters_array, array("bool" => self::createExcludeMyId($requester_id)));
         } else {
@@ -344,7 +344,7 @@ class queryBuilder
         $scored_array = self::constructScoredQuery($conf, $criterias);
         $main_query = array("query" => array("bool" => array("filter" => $filters_array["filter"], "must" => $scored_array["must"])));
         // functions of the function score
-	$functions = self::getBoostingFunctions($requester_id, $conf, $criterias);
+	    $functions = self::getBoostingFunctions($requester_id, $conf, $criterias);
         // get agg score modes frm conf
         $agg_modes = self::getAggModes($conf);
 
