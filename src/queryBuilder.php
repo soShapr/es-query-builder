@@ -233,6 +233,7 @@ class queryBuilder
         regroups all filters. filter out results from the main query that don't satisfy these filters
         */
         $filters_array = array();
+        $place_array = array();
         foreach ($criterias as $key => $value) {
             // if field is a filter one
             if (in_array($key, $conf["match_fields"]) == FALSE & in_array($key, $conf["boosting_fields"]) == FALSE) {
@@ -250,13 +251,27 @@ class queryBuilder
                         array_push($temp_array, self::createTermQuery($key, $sub_value)["filter"]);
                     }
                 }
-                if (count($temp_array) > 1) {
-                    array_push($filters_array, self::createBooleanClause("should", $temp_array));
-                } else {
-                    array_push($filters_array, $temp_array[0]);
-                }
+				// stock city and country information together
+				if(in_array($key, array("city", "country")) == TRUE) {
+					$place_array = array_merge($place_array, $temp_array);
+				} else {
+					if (count($temp_array) > 1) {
+						array_push($filters_array, self::createBooleanClause("should", $temp_array));
+					} else {
+						array_push($filters_array, $temp_array[0]);
+					}
+				}
             }
         }
+        // use a should whatever if it's a city or a country
+		if (count($place_array) > 1) {
+			array_push($filters_array, self::createBooleanClause("should", $place_array));
+        }
+		// if only one place, just add it
+		if (count($place_array) == 1) {
+            array_push($filters_array, $place_array[0]);
+        }
+        
         if (count($filters_array) == 0) {
             $filters_array = array_merge($filters_array, array("bool" => self::createExcludeMyId($requester_id)));
         } else {
