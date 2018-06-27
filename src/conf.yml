@@ -26,6 +26,7 @@
     "ab_meetrefuse_id": -20
     "ba_meetpending_id": -15
     "goal": 4
+    "tag": 4
 
   "options":
     "lastactivity_at":
@@ -38,10 +39,10 @@
       "modifier": "reciprocal"
       "missing": 1
 
-# field types. term query (filter) is used by default
 "match_fields" : ["job"]    # full-text search fields
 "interaction_fields": ["ab_meetpending_id", "ba_meetrefuse_id", "ab_meetrefuse_id", "ba_meetpending_id"]
-"boosting_fields": [] # only for booting, never used in main query
+"boosting_fields": ["tag"] # only for boosting, never used in main query
+"filter_fields": ["city", "country", "goal", "tag"] # to filter out documents
 
 "autocompletion_params":
   "tag":
