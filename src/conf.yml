@@ -41,7 +41,7 @@
 # field types. term query (filter) is used by default
 "match_fields" : ["job"]    # full-text search fields
 "interaction_fields": ["ab_meetpending_id", "ba_meetrefuse_id", "ab_meetrefuse_id", "ba_meetpending_id"]
-"boosting_fields": ["goal"] # only for booting, never used in main query
+"boosting_fields": [] # only for booting, never used in main query
 
 "autocompletion_params":
   "tag":
