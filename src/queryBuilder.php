@@ -171,12 +171,37 @@ class queryBuilder
         return $boosting_filters_array;
     }
 
+
+    /**
+     * @param $lat
+     * @param $lon
+     * @return array
+     */
+    public static function getAroundmeFilterArray($lat, $lon, $conf)
+    {
+        /*
+        returns function of function score that deals with geo point. Boost users around me.
+        */
+        $aroundme_options = $conf["function_score_params"]["options"]["around_me"];
+        $aroundme_weight = $conf["function_score_params"]["weights"]["around_me"];
+
+        $location_array = array("origin" => strval($lat) . ', ' . strval($lon), 
+                                "scale" => $aroundme_options["scale"],
+                                "offset" => $aroundme_options["offset"],
+                                "decay" => $aroundme_options["decay"]);
+        $aroundme_array = array($aroundme_options["method"] => array("location" => $location_array), "weight" => $aroundme_weight);
+
+        return $aroundme_array;
+    }
+
+
     /**
      * @param $requester_id
      * @param $conf
      * @return array
+     * @throws \Exception
      */
-    public static function getBoostingFunctions($requester_id, $conf, $criterias)
+    public static function getBoostingFunctions($requester_id, $lat, $lon, $conf, $criterias)
     {
         /*
         regroups every functions of function score
@@ -185,6 +210,21 @@ class queryBuilder
         array_push($functions, self::getActivityArray($conf));
         array_push($functions, self::getRandomArray($conf));
         array_push($functions, self::getNbMeetpendingArray($conf));
+        
+        // needs to add "around me filter" if no location is precised
+        if (((array_key_exists("city", $criterias)==FALSE) && (array_key_exists("country", $criterias)==FALSE))) {
+            // check if both lat and long have a correct formating
+            if(is_numeric($lat) && is_numeric($lon)) {
+                // cast lon and lat
+                $lat = floatval($lat);
+                $lon = floatval($lon);                
+                if (($lat<=90) && ($lat>=-90) && ($lon<=180) && ($lon>=-180)) {
+                    array_push($functions, self::getAroundmeFilterArray($lat, $lon, $conf));
+                } else {
+                    throw new \Exception('Wrong range value. lat, lon should be between [-90,90] and [-180,180] respectively.');
+                }
+            }
+        }
         $functions = array_merge($functions, self::getInteractionFiltersArray($requester_id, $conf));
 	    $functions = array_merge($functions, self::getBoostingFiltersArray($conf, $criterias));
 
@@ -335,7 +375,7 @@ class queryBuilder
      * @return array
      * @throws \Exception
      */
-    public static function buildSearchQuery($requester_id, $criterias, $from=0, $size=20, $explain=false){
+    public static function buildSearchQuery($requester_id, $lat=null, $lon=null, $criterias, $from=0, $size=20, $explain=false){
         /*
         regroups the scored query and all the filters to form the main query. 
         then this main query is included in the function score with all the functions applied to construct the final body query
@@ -350,7 +390,7 @@ class queryBuilder
         $scored_array = self::constructScoredQuery($conf, $criterias);
         $main_query = array("query" => array("bool" => array("filter" => $filters_array["filter"], "must" => $scored_array["must"])));
         // functions of the function score
-	    $functions = self::getBoostingFunctions($requester_id, $conf, $criterias);
+	    $functions = self::getBoostingFunctions($requester_id, $lat, $lon, $conf, $criterias);
         // get agg score modes frm conf
         $agg_modes = self::getAggModes($conf);
 
