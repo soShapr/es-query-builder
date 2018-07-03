@@ -13,18 +13,20 @@
   "tag":
     "fuzziness": "AUTO"
     "prefix_length": 3
-    "analyzer": "shapr_analyzer_tag_en"
+    "analyzer": "shapr_analyzer_tag_en_search"
     "boost": 1
 
 "function_score_params":
   "weights":
     "lastactivity_at": 3
     "random": 0
+    "around_me" : 3
     "ba_nb_meetpending": 2
     "ab_meetpending_id": 5
     "ba_meetrefuse_id": -20
     "ab_meetrefuse_id": -20
     "ba_meetpending_id": -15
+    "tag": 2
 
   "options":
     "lastactivity_at":
@@ -36,9 +38,16 @@
       "factor": 1
       "modifier": "reciprocal"
       "missing": 1
+    "around_me":
+      "method": "gauss"
+      "scale" : "25km"
+      "offset": "5km"
+      "decay": 0.5
 
-"scored_fields" : ["job"]
-"ranking_fields": ["ab_meetpending_id", "ba_meetrefuse_id", "ab_meetrefuse_id", "ba_meetpending_id"]
+"match_fields" : ["job"]    # full-text search fields
+"interaction_fields": ["ab_meetpending_id", "ba_meetrefuse_id", "ab_meetrefuse_id", "ba_meetpending_id"]
+"boosting_fields": ["tag"] # only for boosting, never used in main query
+"filter_fields": ["city", "country", "goal", "tag"] # to filter out documents
 
 "autocompletion_params":
   "tag":

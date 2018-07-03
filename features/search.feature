@@ -1,7 +1,7 @@
 Feature: Generate valid search queries with fake request id "11111"
 
   Scenario: I search for one 'job' (simple case full text match)
-    When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
+    When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
         "job": [
@@ -111,7 +111,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
 
 	Scenario: I search for one 'job' (without fuzziness)
-    When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
+    When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
         "job": [
@@ -221,7 +221,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
 
   Scenario: I search for one 'job' and one 'country'
-    When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
+    When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
         "job": [
@@ -341,7 +341,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
 
   Scenario: I search for a country only (case of a match all and one clause in filter)
-    When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
+    When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
         "country": [
@@ -448,7 +448,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
 
   Scenario: I search for a tag only (case of match in filter)
-    When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
+    When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
         "tag": [
@@ -517,7 +517,15 @@ Feature: Generate valid search queries with fake request id "11111"
                 }
             },
             "weight": {{function_score_params|weights|ba_meetpending_id}}
-            }
+            },
+			{
+				"filter": {
+					"term": {
+						"tag.raw": "Startups"
+					}
+				},
+				"weight": {{function_score_params|weights|tag}}
+			}
         ],
         "query": {
             "bool": {
@@ -560,7 +568,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
 
   Scenario: I search for multiple criterias including full text in filter and scored queries
-    When I attempt to call the function "buildSearchQuery" with node id "11111" and JSON criterias :
+    When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
         "job": [
@@ -645,40 +653,29 @@ Feature: Generate valid search queries with fake request id "11111"
                 }
             },
             "weight": {{function_score_params|weights|ba_meetpending_id}}
-            }
+            },
+			{
+				"filter": {
+					"term": {
+						"tag.raw": "Startups"
+					}
+				},
+				"weight": 1
+			},
+			{
+				"filter": {
+					"term": {
+						"tag.raw": "Blockchain"
+					}
+				},
+				"weight": 1
+			}
         ],
         "query": {
             "bool": {
             "filter": {
                 "bool": {
                 "must": [
-                {
-                  "term": {
-                    "country": "France"
-                  }
-                },
-                {
-                  "bool": {
-                    "should": [
-                      {
-                        "term": {
-                          "city": "Saint-malo"
-                        }
-                      },
-                      {
-                        "term": {
-                          "city": "Combloux"
-                        }
-                      },
-                      {
-                        "term": {
-                          "city": "Paris area"
-                        }
-                      }
-                    ],
-                    "minimum_should_match": 1
-                  }
-                },
                 {
                   "bool": {
                     "should": [
@@ -687,7 +684,7 @@ Feature: Generate valid search queries with fake request id "11111"
                           "tag": {
                             "fuzziness": "{{full_text_params|tag|fuzziness}}",
                             "prefix_length": {{full_text_params|tag|prefix_length}},
-                            "analyzer": "shapr_analyzer_tag_en",
+                            "analyzer": "{{full_text_params|tag|analyzer}}",
                             "boost": 1,
                             "query": "Startups"
                           }
@@ -698,7 +695,7 @@ Feature: Generate valid search queries with fake request id "11111"
                           "tag": {
                             "fuzziness": "{{full_text_params|tag|fuzziness}}",
                             "prefix_length": {{full_text_params|tag|prefix_length}},
-                            "analyzer": "shapr_analyzer_tag_en",
+                            "analyzer": "{{full_text_params|tag|analyzer}}",
                             "boost": 1,
                             "query": "Blockchain"
                           }
@@ -712,6 +709,33 @@ Feature: Generate valid search queries with fake request id "11111"
                   "term": {
                     "goal": "Ideas & inspiration"
                   }
+                },
+				{
+					"bool": {
+						"should": [
+							{
+								"term": {
+									"country": "France"
+								}
+							},
+							{
+								"term": {
+									"city": "Saint-malo"
+								}
+							},
+							{
+								"term": {
+									"city": "Combloux"
+								}
+							},
+							{
+								"term": {
+									"city": "Paris area"
+								}
+							}
+						],
+						"minimum_should_match": 1
+					}
                 }
                 ],
                 "must_not": {
@@ -768,6 +792,127 @@ Feature: Generate valid search queries with fake request id "11111"
     }
     """
 
+Scenario: I search for one 'job' without Location specify (around-me option will be enabled)
+    When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "40.71" and lon "74" and JSON criterias :
+    """
+    {
+        "job": [
+          "senior ios developer"
+        ]
+      }
+    """
+    Then I expect the following JSON result :
+     """
+    {"explain":false,
+    "query": {
+        "function_score": {
+        "functions": [
+            {
+            "{{function_score_params|options|lastactivity_at|method}}": {
+                "lastactivity_at": {
+                "origin": "{{function_score_params|options|lastactivity_at|origin}}",
+                "scale": "{{function_score_params|options|lastactivity_at|scale}}",
+                "offset": "{{function_score_params|options|lastactivity_at|offset}}",
+                "decay": {{function_score_params|options|lastactivity_at|decay}}
+                }
+            },
+            "weight": {{function_score_params|weights|lastactivity_at}}
+            },
+            {
+            "random_score": {},
+            "weight": {{function_score_params|weights|random}}
+            },
+            {
+            "field_value_factor": {
+                "field": "ba_nb_meetpending",
+                "factor": {{function_score_params|options|ba_nb_meetpending|factor}},
+                "modifier": "{{function_score_params|options|ba_nb_meetpending|modifier}}",
+                "missing": 1
+            },
+            "weight": {{function_score_params|weights|ba_nb_meetpending}}
+            },
+			{
+			"{{function_score_params|options|around_me|method}}": {
+						"location": {
+							"origin": "40.71, 74",
+							"scale": "{{function_score_params|options|around_me|scale}}",
+							"offset": "{{function_score_params|options|around_me|offset}}",
+							"decay": {{function_score_params|options|around_me|decay}}
+						}
+					},
+					"weight": 3
+				},
+			{
+            "filter": {
+                "term": {
+                "ab_meetpending_id": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetpending_id}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetrefuse_id": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetrefuse_id}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id}}
+            }
+        ],
+        "query": {
+            "bool": {
+            "filter": {
+                "bool": {
+                "must_not": {
+                    "term": {
+                    "node_id": "11111"
+                    }
+                }
+                }
+            },
+            "must": {
+                "match": {
+                "job": {
+                    "fuzziness": "{{full_text_params|job|fuzziness}}",
+                    "minimum_should_match": "{{full_text_params|job|minimum_should_match}}",
+                    "prefix_length": {{full_text_params|job|prefix_length}},
+                    "zero_terms_query": "{{full_text_params|job|zero_terms_query}}",
+                    "analyzer": "{{full_text_params|job|analyzer}}",
+                    "boost": {{full_text_params|job|boost}},
+                    "query": "senior ios developer"
+                }
+                }
+            }
+            }
+        },
+        "score_mode": "{{agg_scores_modes|score_mode}}",
+        "boost_mode": "{{agg_scores_modes|boost_mode}}"
+        }
+    },
+    "_source": [
+        "node_id"
+    ],
+    "from" : 0, 
+    "size" : 20
+    }
+    """
+
   Scenario: I search for autocompletion with field "tag"
     When I attempt to call the function "buildSearchQueryAutocompletion" with field "tag" and text "Star"
     Then I expect the following JSON result :
@@ -793,7 +938,11 @@ Feature: Generate valid search queries with fake request id "11111"
     }
     """
 
-  Scenario: I search for autocompletion with field "job"
+
+
+
+
+	Scenario: I search for autocompletion with field "job"
     When I attempt to call the function "buildSearchQueryAutocompletion" with field "job" and text "Prod"
     Then I expect the following JSON result :
     """

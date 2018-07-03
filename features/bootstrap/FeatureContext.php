@@ -17,14 +17,16 @@ class FeatureContext implements Context
     private $getQueryResult;
 
     /**
-     * @When I attempt to call the function :functionToCall with node id :requesterId and JSON criterias :
+     * @When I attempt to call the function :functionToCall with node id :requesterId and lat :lat and lon :lon and JSON criterias :
      * @param $functionToCall
      * @param $requesterId
-     * @param PyStringNode $criterias
+	 * @param $lat
+	 * @param $lon
+	 * @param PyStringNode $criterias
      */
-    public function iAttemptToCallTheFunctionWithNodeIdAndJsonCriterias($functionToCall, $requesterId, PyStringNode $criterias)
+    public function iAttemptToCallTheFunctionWithNodeIdAndJsonCriterias($functionToCall, $requesterId, $lat, $lon, PyStringNode $criterias)
     {
-        $this->getQueryResult = queryBuilder::$functionToCall($requesterId, json_decode($criterias, true));
+        $this->getQueryResult = queryBuilder::$functionToCall($requesterId, $lat, $lon, json_decode($criterias, true));
 
     }
 
@@ -84,10 +86,15 @@ class FeatureContext implements Context
                                    "function_score_params|weights|ba_meetrefuse_id",
                                    "function_score_params|weights|ab_meetrefuse_id",
                                    "function_score_params|weights|ba_meetpending_id",
+                                   "function_score_params|weights|tag",
                                    "function_score_params|options|lastactivity_at|method",
                                    "function_score_params|options|lastactivity_at|scale",
                                    "function_score_params|options|lastactivity_at|offset",
                                    "function_score_params|options|lastactivity_at|decay",
+                                   "function_score_params|options|around_me|method",
+                                   "function_score_params|options|around_me|scale",
+                                   "function_score_params|options|around_me|offset",
+                                   "function_score_params|options|around_me|decay",
                                    "function_score_params|options|ba_nb_meetpending|factor",
                                    "function_score_params|options|ba_nb_meetpending|modifier",
                                    "autocompletion_params|tag|index_name",

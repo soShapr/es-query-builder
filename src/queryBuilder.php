@@ -87,7 +87,7 @@ class queryBuilder
         /*
         constructs a term query
         */
-        if ($weight) {
+        if (!is_null($weight)) {
             return array("filter" => array("term" => array($key => $value)), "weight" => $weight);
         } else {
             return array("filter" => array("term" => array($key => $value)));
@@ -112,7 +112,7 @@ class queryBuilder
         }
         // get specific params for key provided
         $full_text_key_params = $conf["full_text_params"][$key];
-		// disable fuzzinness for protected terms (list psecified in config file)
+	// disable fuzzinness for protected terms (list psecified in config file)
         if ( count(array_intersect(explode(" ", strtolower($value)), $conf["job_protected_terms"])) > 0 )
 			$full_text_key_params["fuzziness"] = 0;
 		
@@ -127,28 +127,81 @@ class queryBuilder
      * @param $conf
      * @return array
      */
-    public static function getRankingFiltersArray($requester_id, $conf)
+    public static function getInteractionFiltersArray($requester_id, $conf)
     {
         /*
         returns functions of function score that deals with users' interactions
         */
-        $fields = $conf["ranking_fields"];
+        $fields = $conf["interaction_fields"];
 
-        $ranking_filters_array = array();
+        $interaction_filters_array = array();
         foreach ($fields as $key) {
             $key_weight = $conf["function_score_params"]["weights"][$key];
-            array_push($ranking_filters_array, self::createTermQuery($key, $requester_id, $key_weight));
+            array_push($interaction_filters_array, self::createTermQuery($key, $requester_id, $key_weight));
         }
 
-        return $ranking_filters_array;
+        return $interaction_filters_array;
     }
+
+    /**
+     * @param $conf
+     * @return array
+     */
+    public static function getBoostingFiltersArray($conf, $criterias)
+    {
+        /*
+        returns functions of function score that deals with users' interactions
+        */
+		$boosting_filters_array = array();
+		foreach ($criterias as $key => $value) {
+			if (in_array($key, $conf["boosting_fields"]) == TRUE) {
+				// The overall weight should be shared between all modalities
+				$key_weight = $conf["function_score_params"]["weights"][$key] / count($value);
+				
+				// test if it is a full text field
+				// in this case we suppose that a field .raw has been created
+				if (array_key_exists($key, $conf["full_text_params"])) {
+					$key = $key . ".raw";
+				}
+				foreach ($value as $sub_value) {
+					array_push($boosting_filters_array, self::createTermQuery($key, $sub_value, $key_weight));
+				}
+			}
+		}
+        return $boosting_filters_array;
+    }
+
+
+    /**
+     * @param $lat
+     * @param $lon
+     * @return array
+     */
+    public static function getAroundmeFilterArray($lat, $lon, $conf)
+    {
+        /*
+        returns function of function score that deals with geo point. Boost users around me.
+        */
+        $aroundme_options = $conf["function_score_params"]["options"]["around_me"];
+        $aroundme_weight = $conf["function_score_params"]["weights"]["around_me"];
+
+        $location_array = array("origin" => strval($lat) . ', ' . strval($lon), 
+                                "scale" => $aroundme_options["scale"],
+                                "offset" => $aroundme_options["offset"],
+                                "decay" => $aroundme_options["decay"]);
+        $aroundme_array = array($aroundme_options["method"] => array("location" => $location_array), "weight" => $aroundme_weight);
+
+        return $aroundme_array;
+    }
+
 
     /**
      * @param $requester_id
      * @param $conf
      * @return array
+     * @throws \Exception
      */
-    public static function getBoostingFunctions($requester_id, $conf)
+    public static function getBoostingFunctions($requester_id, $lat, $lon, $conf, $criterias)
     {
         /*
         regroups every functions of function score
@@ -157,7 +210,23 @@ class queryBuilder
         array_push($functions, self::getActivityArray($conf));
         array_push($functions, self::getRandomArray($conf));
         array_push($functions, self::getNbMeetpendingArray($conf));
-        $functions = array_merge($functions, self::getRankingFiltersArray($requester_id, $conf));
+        
+        // needs to add "around me filter" if no location is precised
+        if (((array_key_exists("city", $criterias)==FALSE) && (array_key_exists("country", $criterias)==FALSE))) {
+            // check if both lat and long have a correct formating
+            if(is_numeric($lat) && is_numeric($lon)) {
+                // cast lon and lat
+                $lat = floatval($lat);
+                $lon = floatval($lon);                
+                if (($lat<=90) && ($lat>=-90) && ($lon<=180) && ($lon>=-180)) {
+                    array_push($functions, self::getAroundmeFilterArray($lat, $lon, $conf));
+                } else {
+                    throw new \Exception('Wrong range value. lat, lon should be between [-90,90] and [-180,180] respectively.');
+                }
+            }
+        }
+        $functions = array_merge($functions, self::getInteractionFiltersArray($requester_id, $conf));
+	    $functions = array_merge($functions, self::getBoostingFiltersArray($conf, $criterias));
 
         return array("functions" => $functions);
     }
@@ -210,9 +279,10 @@ class queryBuilder
         regroups all filters. filter out results from the main query that don't satisfy these filters
         */
         $filters_array = array();
+        $place_array = array();
         foreach ($criterias as $key => $value) {
             // if field is a filter one
-            if (in_array($key, $conf["scored_fields"]) == FALSE) {
+			if (in_array($key, $conf["filter_fields"]) == TRUE) {
                 // if the field is full-text type
                 $full_text = FALSE;
                 if (array_key_exists($key, $conf["full_text_params"])) {
@@ -227,13 +297,27 @@ class queryBuilder
                         array_push($temp_array, self::createTermQuery($key, $sub_value)["filter"]);
                     }
                 }
-                if (count($temp_array) > 1) {
-                    array_push($filters_array, self::createBooleanClause("should", $temp_array));
-                } else {
-                    array_push($filters_array, $temp_array[0]);
-                }
+				// stock city and country information together
+				if(in_array($key, array("city", "country")) == TRUE) {
+					$place_array = array_merge($place_array, $temp_array);
+				} else {
+					if (count($temp_array) > 1) {
+						array_push($filters_array, self::createBooleanClause("should", $temp_array));
+					} else {
+						array_push($filters_array, $temp_array[0]);
+					}
+				}
             }
         }
+        // use a should whatever if it's a city or a country
+		if (count($place_array) > 1) {
+			array_push($filters_array, self::createBooleanClause("should", $place_array));
+        }
+		// if only one place, just add it
+		if (count($place_array) == 1) {
+            array_push($filters_array, $place_array[0]);
+        }
+
         if (count($filters_array) == 0) {
             $filters_array = array_merge($filters_array, array("bool" => self::createExcludeMyId($requester_id)));
         } else {
@@ -256,7 +340,7 @@ class queryBuilder
         */
         $scored_array = array();
         foreach ($criterias as $key => $value) {
-            if (in_array($key, $conf["scored_fields"]) == TRUE) {
+            if (in_array($key, $conf["match_fields"]) == TRUE) {
 
                 $temp_array = array();
                 foreach ($value as $sub_value) {
@@ -291,7 +375,7 @@ class queryBuilder
      * @return array
      * @throws \Exception
      */
-    public static function buildSearchQuery($requester_id, $criterias, $from=0, $size=20, $explain=false){
+    public static function buildSearchQuery($requester_id, $lat=null, $lon=null, $criterias, $from=0, $size=20, $explain=false){
         /*
         regroups the scored query and all the filters to form the main query. 
         then this main query is included in the function score with all the functions applied to construct the final body query
@@ -306,7 +390,7 @@ class queryBuilder
         $scored_array = self::constructScoredQuery($conf, $criterias);
         $main_query = array("query" => array("bool" => array("filter" => $filters_array["filter"], "must" => $scored_array["must"])));
         // functions of the function score
-        $functions = self::getBoostingFunctions($requester_id, $conf);
+	    $functions = self::getBoostingFunctions($requester_id, $lat, $lon, $conf, $criterias);
         // get agg score modes frm conf
         $agg_modes = self::getAggModes($conf);
 
