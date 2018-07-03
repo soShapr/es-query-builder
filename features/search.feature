@@ -684,7 +684,7 @@ Feature: Generate valid search queries with fake request id "11111"
                           "tag": {
                             "fuzziness": "{{full_text_params|tag|fuzziness}}",
                             "prefix_length": {{full_text_params|tag|prefix_length}},
-                            "analyzer": "shapr_analyzer_tag_en",
+                            "analyzer": "{{full_text_params|tag|analyzer}}",
                             "boost": 1,
                             "query": "Startups"
                           }
@@ -695,7 +695,7 @@ Feature: Generate valid search queries with fake request id "11111"
                           "tag": {
                             "fuzziness": "{{full_text_params|tag|fuzziness}}",
                             "prefix_length": {{full_text_params|tag|prefix_length}},
-                            "analyzer": "shapr_analyzer_tag_en",
+                            "analyzer": "{{full_text_params|tag|analyzer}}",
                             "boost": 1,
                             "query": "Blockchain"
                           }
