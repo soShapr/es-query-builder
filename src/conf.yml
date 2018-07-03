@@ -13,7 +13,7 @@
   "tag":
     "fuzziness": "AUTO"
     "prefix_length": 3
-    "analyzer": "shapr_analyzer_tag_en"
+    "analyzer": "shapr_analyzer_tag_en_search"
     "boost": 1
 
 "function_score_params":
@@ -26,7 +26,6 @@
     "ba_meetrefuse_id": -20
     "ab_meetrefuse_id": -20
     "ba_meetpending_id": -15
-    "goal": 2
     "tag": 2
 
   "options":
@@ -41,7 +40,6 @@
       "missing": 1
     "around_me":
       "method": "gauss"
-      "origin": ""
       "scale" : "25km"
       "offset": "5km"
       "decay": 0.5
