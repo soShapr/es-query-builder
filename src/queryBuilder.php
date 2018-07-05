@@ -5,7 +5,7 @@ namespace esQueryBuilder;
 use Symfony\Component\Yaml\Yaml;
 
 
-class queryBuilder
+class queryBuilder implements queryBuilderInterface
 {
     /**
      * @param $conf
@@ -145,6 +145,8 @@ class queryBuilder
 
     /**
      * @param $conf
+     * @param $criterias
+     *
      * @return array
      */
     public static function getBoostingFiltersArray($conf, $criterias)
@@ -175,6 +177,8 @@ class queryBuilder
     /**
      * @param $lat
      * @param $lon
+     * @param $conf
+     *
      * @return array
      */
     public static function getAroundmeFilterArray($lat, $lon, $conf)
@@ -197,7 +201,11 @@ class queryBuilder
 
     /**
      * @param $requester_id
+     * @param $lat
+     * @param $lon
      * @param $conf
+     * @param $criterias
+     *
      * @return array
      * @throws \Exception
      */
@@ -372,10 +380,13 @@ class queryBuilder
      *
      * @param bool $explain
      *
+     * @param null $lat
+     * @param null $lon
+     *
      * @return array
      * @throws \Exception
      */
-    public static function buildSearchQuery($requester_id, $lat=null, $lon=null, $criterias, $from=0, $size=20, $explain=false){
+    public static function buildSearchQuery($requester_id, array $criterias, $from=0, $size=20, $explain=false, $lat=null, $lon=null){
         /*
         regroups the scored query and all the filters to form the main query. 
         then this main query is included in the function score with all the functions applied to construct the final body query
