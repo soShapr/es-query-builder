@@ -39,9 +39,9 @@
       "modifier": "reciprocal"
       "missing": 1
     "around_me":
-      "method": "gauss"
-      "scale" : "25km"
-      "offset": "5km"
+      "method": "exp"
+      "scale" : "35km"
+      "offset": "15km"
       "decay": 0.5
 
 "match_fields" : ["job"]    # full-text search fields
