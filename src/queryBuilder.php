@@ -5,7 +5,7 @@ namespace esQueryBuilder;
 use Symfony\Component\Yaml\Yaml;
 
 
-class queryBuilder extends queryBuilderAbstract
+class queryBuilder implements queryBuilderInterface
 {
     /**
      * @param $conf
