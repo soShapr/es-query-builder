@@ -10,6 +10,13 @@
     "zero_terms_query": "all"
     "analyzer": "shapr_analyzer_job_en_search"
     "boost": 1
+  "job.raw":
+    "fuzziness": 1                 # an edit distance based on the length of the job
+    "prefix_length": 3                  # number of characters at the begining that should NOT be fuzzified
+    "minimum_should_match": "3<76%"     # min match set to 2/3 tokens
+    "zero_terms_query": "all"
+    "analyzer": "shapr_analyzer_job_light"
+    "boost": 0.3
   "tag":
     "fuzziness": "AUTO"
     "prefix_length": 3
