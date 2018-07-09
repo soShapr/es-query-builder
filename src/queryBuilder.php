@@ -456,8 +456,8 @@ class queryBuilder implements queryBuilderInterface
      * @return string
      * @throws \Exception
      */
-    public static function buildSearchQueryJson($requester_id, $criterias, $from=0, $size=20, $explain=false){
-        return json_encode(self::buildSearchQuery($requester_id, $criterias, $from, $size, $explain), true);
+    public static function buildSearchQueryJson($requester_id, $criterias, $from=0, $size=20, $explain=false, $lat=null, $lon=null){
+        return json_encode(self::buildSearchQuery($requester_id, $criterias, $from, $size, $explain, $lat, $lon), true);
     }
 
     /**
