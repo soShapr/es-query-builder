@@ -26,7 +26,7 @@ class FeatureContext implements Context
      */
     public function iAttemptToCallTheFunctionWithNodeIdAndJsonCriterias($functionToCall, $requesterId, $lat, $lon, PyStringNode $criterias)
     {
-        $this->getQueryResult = queryBuilder::$functionToCall($requesterId, json_decode($criterias, true), 0, 20, false,$lat, $lon);
+        $this->getQueryResult = queryBuilder::$functionToCall($requesterId, json_decode($criterias, true), 0, 20, false, $lat, $lon);
 
     }
 
@@ -75,6 +75,12 @@ class FeatureContext implements Context
                                    "full_text_params|job|zero_terms_query",
                                    "full_text_params|job|analyzer",
                                    "full_text_params|job|boost",
+                                   "full_text_params|job.raw|fuzziness",
+                                   "full_text_params|job.raw|minimum_should_match",
+                                   "full_text_params|job.raw|prefix_length",
+                                   "full_text_params|job.raw|zero_terms_query",
+                                   "full_text_params|job.raw|analyzer",
+                                   "full_text_params|job.raw|boost",
                                    "full_text_params|tag|fuzziness",
                                    "full_text_params|tag|prefix_length",
                                    "full_text_params|tag|analyzer",
@@ -124,9 +130,22 @@ class FeatureContext implements Context
         }
         $mustacheInputRender = array_merge($mustacheInputRender, array("function_score_params|options|lastactivity_at|origin"=>date("Y-m-d")));
 
+        // field containing a dot is forbidden in mustache that's why we replace all . by _ 
+        $mustacheInputRenderModified = array();
+        foreach($mustacheInputRender as $key=>$value){
+            $mustacheInputRenderModified[str_replace(".","_",$key)]=$value;
+        }
+        // for now only job and tag might have .raw
+        $responseModified = str_replace("job.raw", "job_raw",$response->getRaw());
+        $responseModified = str_replace("tag.raw", "tag_raw", $responseModified);
+
         // replace keys by the conf values via mustache object
         $m = new Mustache_Engine;
-        $responseCompleted = $m->render($response->getRaw(), $mustacheInputRender);
+        $responseCompleted = $m->render($responseModified, $mustacheInputRenderModified);
+
+        // replace back real field name
+        $responseCompleted = str_replace("job_raw", "job.raw", $responseCompleted);
+        $responseCompleted = str_replace("tag_raw", "tag.raw", $responseCompleted);
 
         // replace html special cases to match elasticsearch expectations
         $responseCompleted = str_replace(array('&lt;','&gt;'), array('<', '>'), $responseCompleted);
