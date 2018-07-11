@@ -10,7 +10,7 @@ Feature: Generate valid search queries with fake request id "11111"
       }
     """
     Then I expect the following JSON result :
-     """
+    """
     {"explain":false,
     "query": {
         "function_score": {
@@ -84,19 +84,39 @@ Feature: Generate valid search queries with fake request id "11111"
                 }
             },
             "must": {
-                "match": {
-                "job": {
-                    "fuzziness": "{{full_text_params|job|fuzziness}}",
-                    "minimum_should_match": "{{full_text_params|job|minimum_should_match}}",
-                    "prefix_length": {{full_text_params|job|prefix_length}},
-                    "zero_terms_query": "{{full_text_params|job|zero_terms_query}}",
-                    "analyzer": "{{full_text_params|job|analyzer}}",
-                    "boost": {{full_text_params|job|boost}},
-                    "query": "student"
-                }
-                }
+                "bool": {
+                    "should": [
+                        {
+                            "match": {
+                                "job": {
+                                    "fuzziness": "{{full_text_params|job|fuzziness}}",
+                                    "minimum_should_match": "{{full_text_params|job|minimum_should_match}}",
+                                    "prefix_length": {{full_text_params|job|prefix_length}},
+                                    "zero_terms_query": "{{full_text_params|job|zero_terms_query}}",
+                                    "analyzer": "{{full_text_params|job|analyzer}}",
+                                    "boost": {{full_text_params|job|boost}},
+                                    "query": "student"
+                                }
+                            }
+                        },
+                        {
+                            "match": {
+                                "job_raw": {
+                                    "fuzziness": "{{full_text_params|job.raw|fuzziness}}",
+                                    "minimum_should_match": "{{full_text_params|job.raw|minimum_should_match}}",
+                                    "prefix_length": {{full_text_params|job.raw|prefix_length}},
+                                    "zero_terms_query": "{{full_text_params|job.raw|zero_terms_query}}",
+                                    "analyzer": "{{full_text_params|job.raw|analyzer}}",
+                                    "boost": {{full_text_params|job.raw|boost}},
+                                    "query": "student"
+                                }
+                            }
+                        }
+                    ],
+                    "minimum_should_match": 1
+                }                           
             }
-            }
+        }
         },
         "score_mode": "{{agg_scores_modes|score_mode}}",
         "boost_mode": "{{agg_scores_modes|boost_mode}}"
@@ -109,7 +129,6 @@ Feature: Generate valid search queries with fake request id "11111"
     "size" : 20
     }
     """
-
 	Scenario: I search for one 'job' (without fuzziness)
     When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
@@ -194,19 +213,39 @@ Feature: Generate valid search queries with fake request id "11111"
                 }
             },
             "must": {
-                "match": {
-                "job": {
-                    "fuzziness": 0,
-                    "minimum_should_match": "{{full_text_params|job|minimum_should_match}}",
-                    "prefix_length": {{full_text_params|job|prefix_length}},
-                    "zero_terms_query": "{{full_text_params|job|zero_terms_query}}",
-                    "analyzer": "{{full_text_params|job|analyzer}}",
-                    "boost": {{full_text_params|job|boost}},
-                    "query": "maker"
-                }
-                }
+                "bool": {
+                    "should": [
+                        {
+                            "match": {
+                                "job": {
+                                    "fuzziness": 0,
+                                    "minimum_should_match": "{{full_text_params|job|minimum_should_match}}",
+                                    "prefix_length": {{full_text_params|job|prefix_length}},
+                                    "zero_terms_query": "{{full_text_params|job|zero_terms_query}}",
+                                    "analyzer": "{{full_text_params|job|analyzer}}",
+                                    "boost": {{full_text_params|job|boost}},
+                                    "query": "maker"
+                                }
+                            }
+                        },
+                        {
+                            "match": {
+                                "job.raw": {
+                                    "fuzziness": 0,
+                                    "minimum_should_match": "{{full_text_params|job.raw|minimum_should_match}}",
+                                    "prefix_length": {{full_text_params|job.raw|prefix_length}},
+                                    "zero_terms_query": "{{full_text_params|job.raw|zero_terms_query}}",
+                                    "analyzer": "{{full_text_params|job.raw|analyzer}}",
+                                    "boost": {{full_text_params|job.raw|boost}},
+                                    "query": "maker"
+                                }
+                            }
+                        }
+                    ],
+                    "minimum_should_match": 1
+                }                           
             }
-            }
+        }
         },
         "score_mode": "{{agg_scores_modes|score_mode}}",
         "boost_mode": "{{agg_scores_modes|boost_mode}}"
@@ -314,17 +353,37 @@ Feature: Generate valid search queries with fake request id "11111"
                 }
             },
             "must": {
-                "match": {
-                "job": {
-                    "fuzziness": "{{full_text_params|job|fuzziness}}",
-                    "minimum_should_match": "{{full_text_params|job|minimum_should_match}}",
-                    "prefix_length": {{full_text_params|job|prefix_length}},
-                    "zero_terms_query": "{{full_text_params|job|zero_terms_query}}",
-                    "analyzer": "{{full_text_params|job|analyzer}}",
-                    "boost": {{full_text_params|job|boost}},
-                    "query": "doctor"
-                }
-                }
+                "bool": {
+                    "should": [
+                        {
+                            "match": {
+                                "job": {
+                                    "fuzziness": "{{full_text_params|job|fuzziness}}",
+                                    "minimum_should_match": "{{full_text_params|job|minimum_should_match}}",
+                                    "prefix_length": {{full_text_params|job|prefix_length}},
+                                    "zero_terms_query": "{{full_text_params|job|zero_terms_query}}",
+                                    "analyzer": "{{full_text_params|job|analyzer}}",
+                                    "boost": {{full_text_params|job|boost}},
+                                    "query": "doctor"
+                                }
+                            }
+                        },
+                        {
+                            "match": {
+                                "job.raw": {
+                                    "fuzziness": "{{full_text_params|job.raw|fuzziness}}",
+                                    "minimum_should_match": "{{full_text_params|job.raw|minimum_should_match}}",
+                                    "prefix_length": {{full_text_params|job.raw|prefix_length}},
+                                    "zero_terms_query": "{{full_text_params|job.raw|zero_terms_query}}",
+                                    "analyzer": "{{full_text_params|job.raw|analyzer}}",
+                                    "boost": {{full_text_params|job.raw|boost}},
+                                    "query": "doctor"
+                                }
+                            }
+                        }
+                    ],
+                    "minimum_should_match": 1
+                }                           
             }
             }
         },
@@ -746,37 +805,63 @@ Feature: Generate valid search queries with fake request id "11111"
                 }
             },
             "must": {
-            "bool": {
-              "should": [
-                {
-                  "match": {
-                    "job": {
-                      "fuzziness": "{{full_text_params|job|fuzziness}}",
-                      "minimum_should_match": "{{full_text_params|job|minimum_should_match}}",
-                      "prefix_length": {{full_text_params|job|prefix_length}},
-                      "zero_terms_query": "{{full_text_params|job|zero_terms_query}}",
-                      "analyzer": "{{full_text_params|job|analyzer}}",
-                      "boost": {{full_text_params|job|boost}},
-                      "query": "doctor"
-                    }
-                  }
-                },
-                {
-                  "match": {
-                    "job": {
-                      "fuzziness": "{{full_text_params|job|fuzziness}}",
-                      "minimum_should_match": "{{full_text_params|job|minimum_should_match}}",
-                      "prefix_length": {{full_text_params|job|prefix_length}},
-                      "zero_terms_query": "{{full_text_params|job|zero_terms_query}}",
-                      "analyzer": "{{full_text_params|job|analyzer}}",
-                      "boost": {{full_text_params|job|boost}},
-                      "query": "actor"
-                    }
-                  }
-                }
-              ],
-              "minimum_should_match": 1
-            }
+                "bool": {
+                    "should": [
+                        {
+                            "match": {
+                                "job": {
+                                    "fuzziness": "{{full_text_params|job|fuzziness}}",
+                                    "minimum_should_match": "{{full_text_params|job|minimum_should_match}}",
+                                    "prefix_length": {{full_text_params|job|prefix_length}},
+                                    "zero_terms_query": "{{full_text_params|job|zero_terms_query}}",
+                                    "analyzer": "{{full_text_params|job|analyzer}}",
+                                    "boost": {{full_text_params|job|boost}},
+                                    "query": "doctor"
+                                }
+                            }
+                        },
+                        {
+                            "match": {
+                                "job.raw": {
+                                    "fuzziness": "{{full_text_params|job.raw|fuzziness}}",
+                                    "minimum_should_match": "{{full_text_params|job.raw|minimum_should_match}}",
+                                    "prefix_length": {{full_text_params|job.raw|prefix_length}},
+                                    "zero_terms_query": "{{full_text_params|job.raw|zero_terms_query}}",
+                                    "analyzer": "{{full_text_params|job.raw|analyzer}}",
+                                    "boost": {{full_text_params|job.raw|boost}},
+                                    "query": "doctor"
+                                }
+                            }
+                        },
+                                                {
+                            "match": {
+                                "job": {
+                                    "fuzziness": "{{full_text_params|job|fuzziness}}",
+                                    "minimum_should_match": "{{full_text_params|job|minimum_should_match}}",
+                                    "prefix_length": {{full_text_params|job|prefix_length}},
+                                    "zero_terms_query": "{{full_text_params|job|zero_terms_query}}",
+                                    "analyzer": "{{full_text_params|job|analyzer}}",
+                                    "boost": {{full_text_params|job|boost}},
+                                    "query": "actor"
+                                }
+                            }
+                        },
+                        {
+                            "match": {
+                                "job.raw": {
+                                    "fuzziness": "{{full_text_params|job.raw|fuzziness}}",
+                                    "minimum_should_match": "{{full_text_params|job.raw|minimum_should_match}}",
+                                    "prefix_length": {{full_text_params|job.raw|prefix_length}},
+                                    "zero_terms_query": "{{full_text_params|job.raw|zero_terms_query}}",
+                                    "analyzer": "{{full_text_params|job.raw|analyzer}}",
+                                    "boost": {{full_text_params|job.raw|boost}},
+                                    "query": "actor"
+                                }
+                            }
+                        }
+                    ],
+                    "minimum_should_match": 1
+                }                           
             }
             }
         },
@@ -887,17 +972,37 @@ Scenario: I search for one 'job' without Location specify (around-me option will
                 }
             },
             "must": {
-                "match": {
-                "job": {
-                    "fuzziness": "{{full_text_params|job|fuzziness}}",
-                    "minimum_should_match": "{{full_text_params|job|minimum_should_match}}",
-                    "prefix_length": {{full_text_params|job|prefix_length}},
-                    "zero_terms_query": "{{full_text_params|job|zero_terms_query}}",
-                    "analyzer": "{{full_text_params|job|analyzer}}",
-                    "boost": {{full_text_params|job|boost}},
-                    "query": "senior ios developer"
-                }
-                }
+                "bool": {
+                    "should": [
+                        {
+                            "match": {
+                                "job": {
+                                    "fuzziness": "{{full_text_params|job|fuzziness}}",
+                                    "minimum_should_match": "{{full_text_params|job|minimum_should_match}}",
+                                    "prefix_length": {{full_text_params|job|prefix_length}},
+                                    "zero_terms_query": "{{full_text_params|job|zero_terms_query}}",
+                                    "analyzer": "{{full_text_params|job|analyzer}}",
+                                    "boost": {{full_text_params|job|boost}},
+                                    "query": "senior ios developer"
+                                }
+                            }
+                        },
+                        {
+                            "match": {
+                                "job.raw": {
+                                    "fuzziness": "{{full_text_params|job.raw|fuzziness}}",
+                                    "minimum_should_match": "{{full_text_params|job.raw|minimum_should_match}}",
+                                    "prefix_length": {{full_text_params|job.raw|prefix_length}},
+                                    "zero_terms_query": "{{full_text_params|job.raw|zero_terms_query}}",
+                                    "analyzer": "{{full_text_params|job.raw|analyzer}}",
+                                    "boost": {{full_text_params|job.raw|boost}},
+                                    "query": "senior ios developer"
+                                }
+                            }
+                        }
+                    ],
+                    "minimum_should_match": 1
+                }                           
             }
             }
         },
@@ -937,10 +1042,6 @@ Scenario: I search for one 'job' without Location specify (around-me option will
     }
     }
     """
-
-
-
-
 
 	Scenario: I search for autocompletion with field "job"
     When I attempt to call the function "buildSearchQueryAutocompletion" with field "job" and text "Prod"
