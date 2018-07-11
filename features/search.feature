@@ -101,7 +101,7 @@ Feature: Generate valid search queries with fake request id "11111"
                         },
                         {
                             "match": {
-                                "job_raw": {
+                                "job.raw": {
                                     "fuzziness": "{{full_text_params|job.raw|fuzziness}}",
                                     "minimum_should_match": "{{full_text_params|job.raw|minimum_should_match}}",
                                     "prefix_length": {{full_text_params|job.raw|prefix_length}},
