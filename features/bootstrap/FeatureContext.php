@@ -26,7 +26,7 @@ class FeatureContext implements Context
      */
     public function iAttemptToCallTheFunctionWithNodeIdAndJsonCriterias($functionToCall, $requesterId, $lat, $lon, PyStringNode $criterias)
     {
-        $this->getQueryResult = queryBuilder::$functionToCall($requesterId, json_decode($criterias, true), 0, 20, false, $lat, $lon);
+        $this->getQueryResult = json_decode(queryBuilder::$functionToCall($requesterId, json_decode($criterias, true), 0, 20, false, $lat, $lon), true);
 
     }
 
@@ -38,7 +38,7 @@ class FeatureContext implements Context
      */
     public function iAttemptToCallTheFunctionWithFieldAndText($functionToCall, $field, $text)
     {
-        $this->getQueryResult = queryBuilder::$functionToCall($field, $text);
+        $this->getQueryResult = json_decode(queryBuilder::$functionToCall($field, $text), true);
 
     }
 
