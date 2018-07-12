@@ -12,7 +12,7 @@ use esQueryBuilder\queryBuilder;
 use Symfony\Component\Yaml\Yaml;
 
 
-$criterias = json_decode('{
+/* $criterias = json_decode('{
     "country": [
         "France"
       ],
@@ -31,13 +31,24 @@ $criterias = json_decode('{
       "city":[
         "paris"
       ]
+}', true); */
+
+$criterias = json_decode('{
+    "tag":[
+      "Blockchain"
+    ],
+    "job":[
+        "ios developer"
+    ],
+    "city":[
+      "Paris area"
+    ]
 }', true);
 
-
 // body search query example
-$my_request = queryBuilder::buildSearchQuery("11111", $criterias, $from=10, $size=30, $explain=true);
+$my_request = queryBuilder::buildSearchQuery("1879462", $criterias, $from=0, $size=30, $explain=false, $lat=null, $lon=null);
 var_dump(json_encode($my_request, true));
 
 // autocompletion example using place
-$my_request = queryBuilder::buildSearchQueryAutocompletion("place", "New");
-var_dump(json_encode($my_request, true));
+/* $my_request = queryBuilder::buildSearchQueryAutocompletion("place", "New");
+var_dump(json_encode($my_request, true)); */

@@ -112,7 +112,7 @@ class queryBuilder implements queryBuilderInterface
         }
         // get specific params for key provided
         $full_text_key_params = $conf["full_text_params"][$key];
-	// disable fuzzinness for protected terms (list psecified in config file)
+	    // disable fuzzinness for protected terms (list psecified in config file)
         if ( count(array_intersect(explode(" ", strtolower($value)), $conf["job_protected_terms"])) > 0 )
 			$full_text_key_params["fuzziness"] = 0;
 		
@@ -353,6 +353,10 @@ class queryBuilder implements queryBuilderInterface
                 $temp_array = array();
                 foreach ($value as $sub_value) {
                     array_push($temp_array, self::createMatchQuery($conf, $key, $sub_value));
+                    // associated raw
+                    if ($key == "job") {
+                        array_push($temp_array, self::createMatchQuery($conf, $key . ".raw", $sub_value));
+                    }
                 }
 
                 if (count($temp_array) > 1) {
@@ -452,8 +456,8 @@ class queryBuilder implements queryBuilderInterface
      * @return string
      * @throws \Exception
      */
-    public static function buildSearchQueryJson($requester_id, $criterias, $from=0, $size=20, $explain=false){
-        return json_encode(self::buildSearchQuery($requester_id, $criterias, $from, $size, $explain), true);
+    public static function buildSearchQueryJson($requester_id, $criterias, $from=0, $size=20, $explain=false, $lat=null, $lon=null){
+        return json_encode(self::buildSearchQuery($requester_id, $criterias, $from, $size, $explain, $lat, $lon), true);
     }
 
     /**
