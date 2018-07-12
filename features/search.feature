@@ -1,7 +1,7 @@
 Feature: Generate valid search queries with fake request id "11111"
 
   Scenario: I search for one 'job' (simple case full text match)
-    When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "none" and lon "none" and JSON criterias :
+    When I attempt to call the function "buildSearchQueryJson" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
         "job": [
@@ -130,7 +130,7 @@ Feature: Generate valid search queries with fake request id "11111"
     }
     """
 	Scenario: I search for one 'job' (without fuzziness)
-    When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "none" and lon "none" and JSON criterias :
+    When I attempt to call the function "buildSearchQueryJson" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
         "job": [
@@ -260,7 +260,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
 
   Scenario: I search for one 'job' and one 'country'
-    When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "none" and lon "none" and JSON criterias :
+    When I attempt to call the function "buildSearchQueryJson" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
         "job": [
@@ -400,7 +400,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
 
   Scenario: I search for a country only (case of a match all and one clause in filter)
-    When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "none" and lon "none" and JSON criterias :
+    When I attempt to call the function "buildSearchQueryJson" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
         "country": [
@@ -507,7 +507,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
 
   Scenario: I search for a tag only (case of match in filter)
-    When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "none" and lon "none" and JSON criterias :
+    When I attempt to call the function "buildSearchQueryJson" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
         "tag": [
@@ -627,7 +627,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
 
   Scenario: I search for multiple criterias including full text in filter and scored queries
-    When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "none" and lon "none" and JSON criterias :
+    When I attempt to call the function "buildSearchQueryJson" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
         "job": [
@@ -878,7 +878,7 @@ Feature: Generate valid search queries with fake request id "11111"
     """
 
 Scenario: I search for one 'job' without Location specify (around-me option will be enabled)
-    When I attempt to call the function "buildSearchQuery" with node id "11111" and lat "40.71" and lon "74" and JSON criterias :
+    When I attempt to call the function "buildSearchQueryJson" with node id "11111" and lat "40.71" and lon "74" and JSON criterias :
     """
     {
         "job": [
@@ -1019,7 +1019,7 @@ Scenario: I search for one 'job' without Location specify (around-me option will
     """
 
   Scenario: I search for autocompletion with field "tag"
-    When I attempt to call the function "buildSearchQueryAutocompletion" with field "tag" and text "Star"
+    When I attempt to call the function "buildSearchQueryAutocompletionJson" with field "tag" and text "Star"
     Then I expect the following JSON result :
     """
     {
@@ -1044,7 +1044,7 @@ Scenario: I search for one 'job' without Location specify (around-me option will
     """
 
 	Scenario: I search for autocompletion with field "job"
-    When I attempt to call the function "buildSearchQueryAutocompletion" with field "job" and text "Prod"
+    When I attempt to call the function "buildSearchQueryAutocompletionJson" with field "job" and text "Prod"
     Then I expect the following JSON result :
     """
     {
@@ -1069,7 +1069,7 @@ Scenario: I search for one 'job' without Location specify (around-me option will
     """
 
   Scenario: I search for autocompletion with field "place"
-    When I attempt to call the function "buildSearchQueryAutocompletion" with field "place" and text "New"
+    When I attempt to call the function "buildSearchQueryAutocompletionJson" with field "place" and text "New"
     Then I expect the following JSON result :
     """
     {
