@@ -453,6 +453,9 @@ class queryBuilder implements queryBuilderInterface
      *
      * @param bool $explain
      *
+     * @param null $lat
+     * @param null $lon
+     *
      * @return string
      * @throws \Exception
      */
