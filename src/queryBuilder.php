@@ -401,6 +401,33 @@ class queryBuilder implements queryBuilderInterface
     }
 
     /**
+     * @param $conf
+     * @param $criterias
+     * @return array
+     * @throws \Exception
+     */
+    public static function applyGoalsMirror($conf, $criterias)
+    {
+        /*
+        transform goals by their "mirror" correspondances if any
+        */
+        if (array_key_exists("goal", $criterias) == TRUE) {
+            $goals_corr = array();
+            foreach ($criterias["goal"] as $goal) {
+                // if a goal has a mirror one
+                if (array_key_exists($goal, $conf["goals_mirror"]) == TRUE) {
+                $goals_corr = array_merge($goals_corr, $conf["goals_mirror"][$goal]);
+                }else{
+                array_push($goals_corr, $goal);
+                }
+            }
+            $goals_corr = array_unique($goals_corr);
+            $criterias["goal"] = $goals_corr;
+        }
+        return $criterias;
+    }
+
+    /**
      * @param      $requester_id
      * @param      $criterias
      * @param int  $from
@@ -423,6 +450,9 @@ class queryBuilder implements queryBuilderInterface
         // path to configuration file
         $conf_path = str_replace('\\', '/', realpath(__DIR__) . DIRECTORY_SEPARATOR . "conf.yml");
         $conf = Yaml::parse(file_get_contents($conf_path));
+
+        // transform goals by their correspondances if any
+        $criterias = self::applyGoalsMirror($conf, $criterias);
 
         // construct scored query
         $filters_array = self::constructFilters($requester_id, $conf, $criterias);
