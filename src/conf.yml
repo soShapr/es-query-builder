@@ -25,7 +25,7 @@
 
 "function_score_params":
   "weights":
-    "lastactivity_at": 3
+    "lastactivity_at": 5
     "random": 0
     "around_me" : 3
     "ba_nb_meetpending": 2
@@ -41,12 +41,13 @@
     "ba_meetpending_id_explorer": -15
     "has_picture": 1
     "tag": 2
+    "goal": 2
 
   "options":
     "lastactivity_at":
       "method": "gauss"
-      "scale": "14d"
-      "offset": "7d"
+      "scale": "7d"
+      "offset": "3d"
       "decay": 0.5
     "ba_nb_meetpending":
       "factor": 1
@@ -58,10 +59,9 @@
       "offset": "15km"
       "decay": 0.5
 
-
 "match_fields" : ["job"]    # full-text search fields
 "interaction_fields": ["ab_meetrefuse_id_search", "ab_meetrefuse_id_explorer", "ba_meetrefuse_id_search", "ba_meetrefuse_id_explorer", "ab_meetpending_id_search", "ab_meetpending_id_search_super", "ab_meetpending_id_explorer", "ab_meetpending_id_explorer_super", "ba_meetpending_id_search", "ba_meetpending_id_explorer"]
-"boosting_fields": ["tag"] # only for boosting, never used in main query
+"boosting_fields": ["tag", "goal"] # only for boosting, never used in main query
 "filter_fields": ["city", "country", "goal", "tag", "node_id"] # to filter out documents
 
 "autocompletion_params":
@@ -93,5 +93,15 @@
         "fuzziness": 1
         "prefix_length": 3
 
-"source_fields": ["node_id"]
+"source_fields": ["node_id", "job", "tag", "goal"]
 "job_protected_terms": ["beauty", "validation", "contrôle", "carer", "florida", "grade", "service", "funding", "trader", "protection", "operator", "gérant", "editing", "grant", "cook", "medic", "projets", "looking", "carrier", "fondateur", "mediator", "penetration", "notary", "dance", "psychologue", "locatif", "officer", "booking", "trainer", "director", "middle", "traductrice", "hote", "d'agence", "file", "writer", "sécurité", "export", "none", "insertion", "packer", "patron", "mental", "formation", "technical", "inventor", "trade", "speaker", "animation", "commodity", "externe", "location", "audiologist", "aviation", "media", "faculty", "backend", "expert", "post", "mode", "ramp", "policier", "baker", "produit", "picker", "community", "cake", "collector", "learning", "janitor", "culturel", "second", "scribe", "curator", "script", "productrice", "tender", "tech", "programmer", "process", "interactive", "chemical", "case", "artist", "jeweller", "transformation", "banquet", "wine", "internal", "retraite", "travel", "auditrice", "member", "operating", "host", "animateur", "teach", "make", "culturelle", "éditrice", "roofer", "trades", "reseller", "founder", "shop", "line", "hacker", "vie", "musicien", "sergeant", "shopper", "pompier", "retraitée", "patent", "global", "fine", "recreation", "office", "infantry", "audit", "park", "corrections", "graphic", "visual", "content", "street", "direct", "manager", "chasseur", "contract", "call", "state", "monteuse", "security", "boss", "interaction", "george", "coordinator", "produits", "concept", "producer", "player", "poet", "hunting", "stack", "retailer", "psychologie", "rap", "magicien", "home", "council", "critical", "french", "matter", "athletic", "marine", "deputy", "caviste", "producteur", "colorist", "blogger", "runner", "porteuse", "detailer", "clothier", "graphics", "d'assurance", "mail", "seller", "grands", "sail", "makeup", "insurance", "voice", "control", "public", "training", "author", "facility", "collections", "masters", "actress", "patient", "toddler", "python", "ingenieur", "qhse", "grocery", "maitrise", "economist", "serveur", "barreau", "health", "cost", "create", "editeur", "enfants", "car", "advocate", "master", "artiste", "comptes", "groomer", "reporter", "growth", "enterprise", "serial", "nothing", "freight", "ryerson", "house", "gerant", "person", "coaching", "audio", "sale", "banker", "crafter", "horse", "builder", "test", "waitress", "scala", "inspector", "courtier", "lender", "bartender", "pastor", "wealth", "change", "nail", "radiologist", "cariste", "repair", "building", "paie", "grad", "creator", "commerce", "pet", "valuation", "qse", "studio", "film", "waiter", "danseur", "acting", "generation", "gestion", "stage", "presse", "reporting", "parts", "chair", "leasing", "mobile", "closer", "machine", "master's", "planner", "actively", "uber", "special", "contracts", "plumber", "vice", "loss", "live", "vlogger", "traducteur", "budtender", "fraser", "inventory", "paris", "pigiste", "investor", "social", "georgia", "cadre", "dancer", "usher", "conception", "model", "programmeur", "actrice", "pair", "mixologist", "cafe", "casino", "station", "coventry", "scale", "internet", "formateur", "channel", "product", "grants", "cleaner", "consultor", "archivist", "interieur", "male", "boston", "life", "success", "manger", "moniteur", "printer", "streamer", "record", "care", "plombier", "searching", "danseuse", "figure", "partie", "retention", "houston", "coursier", "coordinateur", "recording", "stock", "ranger", "mechanical", "lance", "fighter", "pianiste", "caterer", "conducteur", "interne", "cast", "screen", "all", "factrice", "dental", "billing", "project", "operation", "virtual", "skipper", "painter", "avocate", "sourcer", "controls", "floral", "banquier", "information", "teller", "user", "gérante", "maker", "entreprise", "higher", "notaire", "book", "drafter", "agence", "scholar", "conseil", "courier", "composer", "athlete", "bartend", "fondatrice", "camera", "transportation", "sole", "projet", "west", "monteur", "traiteur", "show", "part", "camp", "production", "concession", "hair", "zone", "ecommerce", "bureau", "societe", "operations", "formatrice", "framer", "dublin", "rapper", "chain", "device", "peintre"]
+"goals_mirror": 
+  "8791": ["8796"]
+  "8792": ["8797", "1325973"]
+  "8796": ["8791"]
+  "8797": ["8792"]
+  "8802": ["1325970"]
+  "306511": ["1325972"]
+  "1325970": ["8802"]
+  "1325972": ["306511"]
+  "1325973": ["8792", "8799"]
