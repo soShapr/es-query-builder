@@ -198,6 +198,23 @@ class queryBuilder implements queryBuilderInterface
         return $aroundme_array;
     }
 
+    /**
+     * @param $conf
+     *
+     * @return array
+     */
+    public static function getHasPictureArray($conf)
+    {
+        /*
+        returns filter to boost results with a picture
+        */
+        $has_picture_array = array();
+        $key_weight = $conf["function_score_params"]["weights"]["has_picture"];
+        array_push($has_picture_array, self::createTermQuery("has_picture", 1, $key_weight));
+
+        return $has_picture_array[0];
+    }
+
 
     /**
      * @param $requester_id
@@ -218,6 +235,7 @@ class queryBuilder implements queryBuilderInterface
         array_push($functions, self::getActivityArray($conf));
         array_push($functions, self::getRandomArray($conf));
         array_push($functions, self::getNbMeetpendingArray($conf));
+        array_push($functions, self::getHasPictureArray($conf));
         
         // needs to add "around me filter" if no location is precised
         if (((array_key_exists("city", $criterias)==FALSE) && (array_key_exists("country", $criterias)==FALSE))) {
