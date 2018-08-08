@@ -42,10 +42,10 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                    "has_picture": {{function_score_params|weights|has_picture}}
+                    "has_picture": 1
                 }
             },
-            "weight": 1
+            "weight": {{function_score_params|weights|has_picture}}
             },
             {
             "filter": {
@@ -212,10 +212,10 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                    "has_picture": {{function_score_params|weights|has_picture}}
+                    "has_picture": 1
                 }
             },
-            "weight": 1
+            "weight": {{function_score_params|weights|has_picture}}
             },
             {
             "filter": {
@@ -382,13 +382,13 @@ Feature: Generate valid search queries with fake request id "11111"
             },
             "weight": {{function_score_params|weights|ba_nb_meetpending}}
             },
-                        {
+            {
             "filter": {
                 "term": {
-                    "has_picture": {{function_score_params|weights|has_picture}}
+                    "has_picture": 1
                 }
             },
-            "weight": 1
+            "weight": {{function_score_params|weights|has_picture}}
             },
             {
             "filter": {
@@ -562,10 +562,10 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                    "has_picture": {{function_score_params|weights|has_picture}}
+                    "has_picture": 1
                 }
             },
-            "weight": 1
+            "weight": {{function_score_params|weights|has_picture}}
             },
             {
             "filter": {
@@ -709,10 +709,10 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                    "has_picture": {{function_score_params|weights|has_picture}}
+                    "has_picture": 1
                 }
             },
-            "weight": 1
+            "weight": {{function_score_params|weights|has_picture}}
             },
             {
             "filter": {
@@ -885,10 +885,10 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                    "has_picture": {{function_score_params|weights|has_picture}}
+                    "has_picture": 1
                 }
             },
-            "weight": 1
+            "weight": {{function_score_params|weights|has_picture}}
             },
             {
             "filter": {
@@ -1160,10 +1160,10 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                "has_picture": {{function_score_params|weights|has_picture}}
+                    "has_picture": 1
                 }
             },
-            "weight": 1
+            "weight": {{function_score_params|weights|has_picture}}
             },
 			{
 			"{{function_score_params|options|around_me|method}}": {
