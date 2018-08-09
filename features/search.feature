@@ -1,6 +1,6 @@
 Feature: Generate valid search queries with fake request id "11111"
 
-  Scenario: I search for one 'job' (simple case full text match)
+    Scenario: I search for one 'job' (simple case full text match)
     When I attempt to call the function "buildSearchQueryJson" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
@@ -42,34 +42,74 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                "ab_meetpending_id": "11111"
+                    "has_picture": 1
                 }
             },
-            "weight": {{function_score_params|weights|ab_meetpending_id}}
+            "weight": {{function_score_params|weights|has_picture}}
             },
             {
             "filter": {
                 "term": {
-                "ba_meetrefuse_id": "11111"
+                "ab_meetpending_id_explorer": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id}}
+            "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
             },
             {
             "filter": {
                 "term": {
-                "ab_meetrefuse_id": "11111"
+                "ab_meetpending_id_search": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ab_meetrefuse_id}}
+            "weight": {{function_score_params|weights|ab_meetpending_id_search}}
             },
             {
             "filter": {
                 "term": {
-                "ba_meetpending_id": "11111"
+                "ba_meetrefuse_id_explorer": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ba_meetpending_id}}
+            "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetrefuse_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id_explorer": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id_search}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id_explorer": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id_search}}
             }
         ],
         "query": {
@@ -129,7 +169,8 @@ Feature: Generate valid search queries with fake request id "11111"
     "size" : 20
     }
     """
-	Scenario: I search for one 'job' (without fuzziness)
+
+    Scenario: I search for one 'job' (without fuzziness)
     When I attempt to call the function "buildSearchQueryJson" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
@@ -171,34 +212,74 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                "ab_meetpending_id": "11111"
+                    "has_picture": 1
                 }
             },
-            "weight": {{function_score_params|weights|ab_meetpending_id}}
+            "weight": {{function_score_params|weights|has_picture}}
             },
             {
             "filter": {
                 "term": {
-                "ba_meetrefuse_id": "11111"
+                "ab_meetpending_id_explorer": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id}}
+            "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
             },
             {
             "filter": {
                 "term": {
-                "ab_meetrefuse_id": "11111"
+                "ab_meetpending_id_search": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ab_meetrefuse_id}}
+            "weight": {{function_score_params|weights|ab_meetpending_id_search}}
             },
             {
             "filter": {
                 "term": {
-                "ba_meetpending_id": "11111"
+                "ba_meetrefuse_id_explorer": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ba_meetpending_id}}
+            "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetrefuse_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id_explorer": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id_search}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id_explorer": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id_search}}
             }
         ],
         "query": {
@@ -259,7 +340,7 @@ Feature: Generate valid search queries with fake request id "11111"
     }
     """
 
-  Scenario: I search for one 'job' and one 'country'
+    Scenario: I search for one 'job' and one 'country'
     When I attempt to call the function "buildSearchQueryJson" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
@@ -304,34 +385,74 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                "ab_meetpending_id": "11111"
+                    "has_picture": 1
                 }
             },
-            "weight": {{function_score_params|weights|ab_meetpending_id}}
+            "weight": {{function_score_params|weights|has_picture}}
             },
             {
             "filter": {
                 "term": {
-                "ba_meetrefuse_id": "11111"
+                "ab_meetpending_id_explorer": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id}}
+            "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
             },
             {
             "filter": {
                 "term": {
-                "ab_meetrefuse_id": "11111"
+                "ab_meetpending_id_search": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ab_meetrefuse_id}}
+            "weight": {{function_score_params|weights|ab_meetpending_id_search}}
             },
             {
             "filter": {
                 "term": {
-                "ba_meetpending_id": "11111"
+                "ba_meetrefuse_id_explorer": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ba_meetpending_id}}
+            "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetrefuse_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id_explorer": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id_search}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id_explorer": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id_search}}
             }
         ],
         "query": {
@@ -399,7 +520,7 @@ Feature: Generate valid search queries with fake request id "11111"
     }
     """
 
-  Scenario: I search for a country only (case of a match all and one clause in filter)
+    Scenario: I search for a country only (case of a match all and one clause in filter)
     When I attempt to call the function "buildSearchQueryJson" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
@@ -441,34 +562,74 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                "ab_meetpending_id": "11111"
+                    "has_picture": 1
                 }
             },
-            "weight": {{function_score_params|weights|ab_meetpending_id}}
+            "weight": {{function_score_params|weights|has_picture}}
             },
             {
             "filter": {
                 "term": {
-                "ba_meetrefuse_id": "11111"
+                "ab_meetpending_id_explorer": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id}}
+            "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
             },
             {
             "filter": {
                 "term": {
-                "ab_meetrefuse_id": "11111"
+                "ab_meetpending_id_search": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ab_meetrefuse_id}}
+            "weight": {{function_score_params|weights|ab_meetpending_id_search}}
             },
             {
             "filter": {
                 "term": {
-                "ba_meetpending_id": "11111"
+                "ba_meetrefuse_id_explorer": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ba_meetpending_id}}
+            "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetrefuse_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id_explorer": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id_search}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id_explorer": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id_search}}
             }
         ],
         "query": {
@@ -506,7 +667,7 @@ Feature: Generate valid search queries with fake request id "11111"
     }
     """
 
-  Scenario: I search for a tag only (case of match in filter)
+    Scenario: I search for a tag only (case of match in filter)
     When I attempt to call the function "buildSearchQueryJson" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
@@ -548,42 +709,82 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                "ab_meetpending_id": "11111"
+                    "has_picture": 1
                 }
             },
-            "weight": {{function_score_params|weights|ab_meetpending_id}}
+            "weight": {{function_score_params|weights|has_picture}}
             },
             {
             "filter": {
                 "term": {
-                "ba_meetrefuse_id": "11111"
+                "ab_meetpending_id_explorer": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id}}
+            "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
             },
             {
             "filter": {
                 "term": {
-                "ab_meetrefuse_id": "11111"
+                "ab_meetpending_id_search": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ab_meetrefuse_id}}
+            "weight": {{function_score_params|weights|ab_meetpending_id_search}}
             },
             {
             "filter": {
                 "term": {
-                "ba_meetpending_id": "11111"
+                "ba_meetrefuse_id_explorer": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ba_meetpending_id}}
+            "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetrefuse_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id_explorer": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id_search}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id_explorer": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id_search}}
             },
 			{
-				"filter": {
-					"term": {
-						"tag.raw": "Startups"
-					}
-				},
-				"weight": {{function_score_params|weights|tag}}
+			"filter": {
+				"term": {
+				"tag.raw": "Startups"
+				}
+			},
+			"weight": {{function_score_params|weights|tag}}
 			}
         ],
         "query": {
@@ -626,7 +827,7 @@ Feature: Generate valid search queries with fake request id "11111"
     }
     """
 
-  Scenario: I search for multiple criterias including full text in filter and scored queries
+    Scenario: I search for multiple criterias including full text in filter and scored queries
     When I attempt to call the function "buildSearchQueryJson" with node id "11111" and lat "none" and lon "none" and JSON criterias :
     """
     {
@@ -684,50 +885,90 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                "ab_meetpending_id": "11111"
+                    "has_picture": 1
                 }
             },
-            "weight": {{function_score_params|weights|ab_meetpending_id}}
+            "weight": {{function_score_params|weights|has_picture}}
             },
             {
             "filter": {
                 "term": {
-                "ba_meetrefuse_id": "11111"
+                "ab_meetpending_id_explorer": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id}}
+            "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
             },
             {
             "filter": {
                 "term": {
-                "ab_meetrefuse_id": "11111"
+                "ab_meetpending_id_search": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ab_meetrefuse_id}}
+            "weight": {{function_score_params|weights|ab_meetpending_id_search}}
             },
             {
             "filter": {
                 "term": {
-                "ba_meetpending_id": "11111"
+                "ba_meetrefuse_id_explorer": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ba_meetpending_id}}
+            "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetrefuse_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id_explorer": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id_search}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id_explorer": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id_search}}
             },
 			{
-				"filter": {
-					"term": {
-						"tag.raw": "Startups"
-					}
-				},
-				"weight": 1
+            "filter": {
+                "term": {
+                "tag.raw": "Startups"
+                }
+            },
+            "weight": 1
 			},
 			{
-				"filter": {
-					"term": {
-						"tag.raw": "Blockchain"
-					}
-				},
-				"weight": 1
+            "filter": {
+                "term": {
+                "tag.raw": "Blockchain"
+                }
+            },
+            "weight": 1
 			}
         ],
         "query": {
@@ -877,7 +1118,7 @@ Feature: Generate valid search queries with fake request id "11111"
     }
     """
 
-Scenario: I search for one 'job' without Location specify (around-me option will be enabled)
+    Scenario: I search for one 'job' without Location specify (around-me option will be enabled)
     When I attempt to call the function "buildSearchQueryJson" with node id "11111" and lat "40.71" and lon "74" and JSON criterias :
     """
     {
@@ -916,6 +1157,14 @@ Scenario: I search for one 'job' without Location specify (around-me option will
             },
             "weight": {{function_score_params|weights|ba_nb_meetpending}}
             },
+            {
+            "filter": {
+                "term": {
+                    "has_picture": 1
+                }
+            },
+            "weight": {{function_score_params|weights|has_picture}}
+            },
 			{
 			"{{function_score_params|options|around_me|method}}": {
 						"location": {
@@ -926,38 +1175,70 @@ Scenario: I search for one 'job' without Location specify (around-me option will
 						}
 					},
 					"weight": 3
-				},
-			{
+			},
+            {
             "filter": {
                 "term": {
-                "ab_meetpending_id": "11111"
+                "ab_meetpending_id_explorer": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ab_meetpending_id}}
+            "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
             },
             {
             "filter": {
                 "term": {
-                "ba_meetrefuse_id": "11111"
+                "ab_meetpending_id_search": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id}}
+            "weight": {{function_score_params|weights|ab_meetpending_id_search}}
             },
             {
             "filter": {
                 "term": {
-                "ab_meetrefuse_id": "11111"
+                "ba_meetrefuse_id_explorer": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ab_meetrefuse_id}}
+            "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
             },
             {
             "filter": {
                 "term": {
-                "ba_meetpending_id": "11111"
+                "ba_meetrefuse_id_search": "11111"
                 }
             },
-            "weight": {{function_score_params|weights|ba_meetpending_id}}
+            "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id_explorer": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ab_meetrefuse_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ab_meetrefuse_id_search}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id_explorer": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
+            },
+            {
+            "filter": {
+                "term": {
+                "ba_meetpending_id_search": "11111"
+                }
+            },
+            "weight": {{function_score_params|weights|ba_meetpending_id_search}}
             }
         ],
         "query": {

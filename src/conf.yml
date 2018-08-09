@@ -29,10 +29,15 @@
     "random": 0
     "around_me" : 3
     "ba_nb_meetpending": 2
-    "ab_meetpending_id": 5
-    "ba_meetrefuse_id": -20
-    "ab_meetrefuse_id": -20
-    "ba_meetpending_id": -15
+    "ab_meetpending_id_explorer": 5
+    "ab_meetpending_id_search": 5
+    "ba_meetrefuse_id_explorer": -20
+    "ba_meetrefuse_id_search": -15
+    "ab_meetrefuse_id_explorer": -20
+    "ab_meetrefuse_id_search": 0
+    "ba_meetpending_id_explorer": -15
+    "ba_meetpending_id_search": -15
+    "has_picture": 1
     "tag": 2
 
   "options":
@@ -51,10 +56,11 @@
       "offset": "15km"
       "decay": 0.5
 
+
 "match_fields" : ["job"]    # full-text search fields
-"interaction_fields": ["ab_meetpending_id", "ba_meetrefuse_id", "ab_meetrefuse_id", "ba_meetpending_id"]
+"interaction_fields": ["ab_meetpending_id_explorer", "ab_meetpending_id_search", "ba_meetrefuse_id_explorer", "ba_meetrefuse_id_search", "ab_meetrefuse_id_explorer", "ab_meetrefuse_id_search", "ba_meetpending_id_explorer", "ba_meetpending_id_search"]
 "boosting_fields": ["tag"] # only for boosting, never used in main query
-"filter_fields": ["city", "country", "goal", "tag"] # to filter out documents
+"filter_fields": ["city", "country", "goal", "tag", "node_id"] # to filter out documents
 
 "autocompletion_params":
   "tag":
