@@ -284,12 +284,16 @@ class queryBuilder implements queryBuilderInterface
      * @param $requester_id
      * @return array
      */
-    public static function createExcludeMyId($requester_id)
+    public static function createExcludeTerms($requester_id)
     {
         /*
-        specific filters that excludes my id from the result
+        specific filters that excludes my id from the result and people in meet
         */
-        return array("must_not" => array("term" => array("node_id" => $requester_id)));
+        $exclude_ids_array = array();
+        array_push($exclude_ids_array, array("term" => array("node_id" => $requester_id)));
+        array_push($exclude_ids_array, array("term" => array("meet_id" => $requester_id)));
+
+        return array("must_not" => $exclude_ids_array);
     }
 
     /**
@@ -345,10 +349,10 @@ class queryBuilder implements queryBuilderInterface
         }
 
         if (count($filters_array) == 0) {
-            $filters_array = array_merge($filters_array, array("bool" => self::createExcludeMyId($requester_id)));
+            $filters_array = array_merge($filters_array, array("bool" => self::createExcludeTerms($requester_id)));
         } else {
             $filters_array = self::createBooleanClause("must", $filters_array);
-            $filters_array["bool"] = array_merge($filters_array["bool"], self::createExcludeMyId($requester_id));
+            $filters_array["bool"] = array_merge($filters_array["bool"], self::createExcludeTerms($requester_id));
         }
         return array("filter" => $filters_array);
     }
