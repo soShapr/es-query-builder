@@ -116,11 +116,18 @@ Feature: Generate valid search queries with fake request id "11111"
             "bool": {
             "filter": {
                 "bool": {
-                "must_not": {
-                    "term": {
-                    "node_id": "11111"
-                    }
-                }
+                    "must_not": [
+                        {
+                        "term": {
+                            "node_id": "11111"
+                        }
+                        },
+                        {
+                        "term": {
+                            "meet_id": "11111"
+                        }
+                        }
+                    ]
                 }
             },
             "must": {
@@ -286,11 +293,18 @@ Feature: Generate valid search queries with fake request id "11111"
             "bool": {
             "filter": {
                 "bool": {
-                "must_not": {
-                    "term": {
-                    "node_id": "11111"
-                    }
-                }
+                    "must_not": [
+                        {
+                        "term": {
+                            "node_id": "11111"
+                        }
+                        },
+                        {
+                        "term": {
+                            "meet_id": "11111"
+                        }
+                        }
+                    ]
                 }
             },
             "must": {
@@ -466,11 +480,18 @@ Feature: Generate valid search queries with fake request id "11111"
                         }
                     }
                 ],
-                "must_not": {
+                "must_not": [
+                    {
                     "term": {
                         "node_id": "11111"
                     }
-                }
+                    },
+                    {
+                    "term": {
+                        "meet_id": "11111"
+                    }
+                    }
+                ]
                 }
             },
             "must": {
@@ -643,11 +664,18 @@ Feature: Generate valid search queries with fake request id "11111"
                         }
                     }
                 ],
-                "must_not": {
+                "must_not": [
+                    {
                     "term": {
                         "node_id": "11111"
                     }
-                }
+                    },
+                    {
+                    "term": {
+                        "meet_id": "11111"
+                    }
+                    }
+                ]
                 }
             },
             "must": {
@@ -803,11 +831,18 @@ Feature: Generate valid search queries with fake request id "11111"
                         }
                     }
                 ],
-                "must_not": {
+                "must_not": [
+                    {
                     "term": {
                         "node_id": "11111"
                     }
-                }
+                    },
+                    {
+                    "term": {
+                        "meet_id": "11111"
+                    }
+                    }
+                ]
                 }
             },
             "must": {
@@ -1038,11 +1073,18 @@ Feature: Generate valid search queries with fake request id "11111"
 					}
                 }
                 ],
-                "must_not": {
+                "must_not": [
+                    {
                     "term": {
                         "node_id": "11111"
                     }
-                }
+                    },
+                    {
+                    "term": {
+                        "meet_id": "11111"
+                    }
+                    }
+                ]
                 }
             },
             "must": {
@@ -1245,11 +1287,18 @@ Feature: Generate valid search queries with fake request id "11111"
             "bool": {
             "filter": {
                 "bool": {
-                "must_not": {
-                    "term": {
-                    "node_id": "11111"
-                    }
-                }
+                    "must_not": [
+                        {
+                        "term": {
+                            "node_id": "11111"
+                        }
+                        },
+                        {
+                        "term": {
+                            "meet_id": "11111"
+                        }
+                        }
+                    ]
                 }
             },
             "must": {
