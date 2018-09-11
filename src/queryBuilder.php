@@ -287,11 +287,13 @@ class queryBuilder implements queryBuilderInterface
     public static function createExcludeTerms($requester_id)
     {
         /*
-        specific filters that excludes my id from the result and people in meet
+        specific filters that exclude my id, meets, superswipes made by be from the result
         */
         $exclude_ids_array = array();
         array_push($exclude_ids_array, array("term" => array("node_id" => $requester_id)));
         array_push($exclude_ids_array, array("term" => array("meet_id" => $requester_id)));
+        array_push($exclude_ids_array, array("term" => array("ba_meetpending_id_search_super" => $requester_id)));
+        array_push($exclude_ids_array, array("term" => array("ba_meetpending_id_explorer_super" => $requester_id)));
 
         return array("must_not" => $exclude_ids_array);
     }
