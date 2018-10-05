@@ -50,66 +50,82 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                "ab_meetpending_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetpending_id_search": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetpending_id_search}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ba_meetrefuse_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ba_meetrefuse_id_search": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetrefuse_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetrefuse_id_search": "11111"
+                    "ab_meetrefuse_id_search": "11111"
                 }
             },
             "weight": {{function_score_params|weights|ab_meetrefuse_id_search}}
             },
             {
-            "filter": {
+              "filter": {
                 "term": {
-                "ba_meetpending_id_explorer": "11111"
+                  "ab_meetrefuse_id_explorer": "11111"
                 }
-            },
-            "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
+              },
+              "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
             },
             {
-            "filter": {
+              "filter": {
                 "term": {
-                "ba_meetpending_id_search": "11111"
+                  "ba_meetrefuse_id_search": "11111"
                 }
+              },
+              "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
             },
-            "weight": {{function_score_params|weights|ba_meetpending_id_search}}
+            {
+              "filter": {
+                "term": {
+                  "ba_meetrefuse_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_search": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_search}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_search_super": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_search_super}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_explorer_super": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_explorer_super}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ba_meetpending_id_search": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetpending_id_search}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ba_meetpending_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
             }
         ],
         "query": {
@@ -125,6 +141,16 @@ Feature: Generate valid search queries with fake request id "11111"
                         {
                         "term": {
                             "meet_id": "11111"
+                        }
+                        },
+                        {
+                        "term": {
+                            "ba_meetpending_id_search_super": "11111"
+                        }
+                        },
+                        {
+                          "term": {
+                            "ba_meetpending_id_explorer_super": "11111"
                         }
                         }
                     ]
@@ -227,66 +253,82 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                "ab_meetpending_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetpending_id_search": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetpending_id_search}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ba_meetrefuse_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ba_meetrefuse_id_search": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetrefuse_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetrefuse_id_search": "11111"
+                    "ab_meetrefuse_id_search": "11111"
                 }
             },
             "weight": {{function_score_params|weights|ab_meetrefuse_id_search}}
             },
             {
-            "filter": {
+              "filter": {
                 "term": {
-                "ba_meetpending_id_explorer": "11111"
+                  "ab_meetrefuse_id_explorer": "11111"
                 }
-            },
-            "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
+              },
+              "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
             },
             {
-            "filter": {
+              "filter": {
                 "term": {
-                "ba_meetpending_id_search": "11111"
+                  "ba_meetrefuse_id_search": "11111"
                 }
+              },
+              "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
             },
-            "weight": {{function_score_params|weights|ba_meetpending_id_search}}
+            {
+              "filter": {
+                "term": {
+                  "ba_meetrefuse_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_search": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_search}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_search_super": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_search_super}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_explorer_super": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_explorer_super}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ba_meetpending_id_search": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetpending_id_search}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ba_meetpending_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
             }
         ],
         "query": {
@@ -302,6 +344,16 @@ Feature: Generate valid search queries with fake request id "11111"
                         {
                         "term": {
                             "meet_id": "11111"
+                        }
+                        },
+                        {
+                        "term": {
+                            "ba_meetpending_id_search_super": "11111"
+                        }
+                        },
+                        {
+                          "term": {
+                            "ba_meetpending_id_explorer_super": "11111"
                         }
                         }
                     ]
@@ -407,66 +459,82 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                "ab_meetpending_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetpending_id_search": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetpending_id_search}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ba_meetrefuse_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ba_meetrefuse_id_search": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetrefuse_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetrefuse_id_search": "11111"
+                    "ab_meetrefuse_id_search": "11111"
                 }
             },
             "weight": {{function_score_params|weights|ab_meetrefuse_id_search}}
             },
             {
-            "filter": {
+              "filter": {
                 "term": {
-                "ba_meetpending_id_explorer": "11111"
+                  "ab_meetrefuse_id_explorer": "11111"
                 }
-            },
-            "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
+              },
+              "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
             },
             {
-            "filter": {
+              "filter": {
                 "term": {
-                "ba_meetpending_id_search": "11111"
+                  "ba_meetrefuse_id_search": "11111"
                 }
+              },
+              "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
             },
-            "weight": {{function_score_params|weights|ba_meetpending_id_search}}
+            {
+              "filter": {
+                "term": {
+                  "ba_meetrefuse_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_search": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_search}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_search_super": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_search_super}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_explorer_super": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_explorer_super}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ba_meetpending_id_search": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetpending_id_search}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ba_meetpending_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
             }
         ],
         "query": {
@@ -481,16 +549,26 @@ Feature: Generate valid search queries with fake request id "11111"
                     }
                 ],
                 "must_not": [
-                    {
-                    "term": {
-                        "node_id": "11111"
-                    }
-                    },
-                    {
-                    "term": {
-                        "meet_id": "11111"
-                    }
-                    }
+                        {
+                        "term": {
+                            "node_id": "11111"
+                        }
+                        },
+                        {
+                        "term": {
+                            "meet_id": "11111"
+                        }
+                        },
+                        {
+                        "term": {
+                            "ba_meetpending_id_search_super": "11111"
+                        }
+                        },
+                        {
+                          "term": {
+                            "ba_meetpending_id_explorer_super": "11111"
+                        }
+                        }
                 ]
                 }
             },
@@ -591,66 +669,82 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                "ab_meetpending_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetpending_id_search": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetpending_id_search}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ba_meetrefuse_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ba_meetrefuse_id_search": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetrefuse_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetrefuse_id_search": "11111"
+                    "ab_meetrefuse_id_search": "11111"
                 }
             },
             "weight": {{function_score_params|weights|ab_meetrefuse_id_search}}
             },
             {
-            "filter": {
+              "filter": {
                 "term": {
-                "ba_meetpending_id_explorer": "11111"
+                  "ab_meetrefuse_id_explorer": "11111"
                 }
-            },
-            "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
+              },
+              "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
             },
             {
-            "filter": {
+              "filter": {
                 "term": {
-                "ba_meetpending_id_search": "11111"
+                  "ba_meetrefuse_id_search": "11111"
                 }
+              },
+              "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
             },
-            "weight": {{function_score_params|weights|ba_meetpending_id_search}}
+            {
+              "filter": {
+                "term": {
+                  "ba_meetrefuse_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_search": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_search}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_search_super": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_search_super}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_explorer_super": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_explorer_super}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ba_meetpending_id_search": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetpending_id_search}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ba_meetpending_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
             }
         ],
         "query": {
@@ -665,16 +759,26 @@ Feature: Generate valid search queries with fake request id "11111"
                     }
                 ],
                 "must_not": [
-                    {
-                    "term": {
-                        "node_id": "11111"
-                    }
-                    },
-                    {
-                    "term": {
-                        "meet_id": "11111"
-                    }
-                    }
+                        {
+                        "term": {
+                            "node_id": "11111"
+                        }
+                        },
+                        {
+                        "term": {
+                            "meet_id": "11111"
+                        }
+                        },
+                        {
+                        "term": {
+                            "ba_meetpending_id_search_super": "11111"
+                        }
+                        },
+                        {
+                          "term": {
+                            "ba_meetpending_id_explorer_super": "11111"
+                        }
+                        }
                 ]
                 }
             },
@@ -745,66 +849,82 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                "ab_meetpending_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetpending_id_search": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetpending_id_search}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ba_meetrefuse_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ba_meetrefuse_id_search": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetrefuse_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetrefuse_id_search": "11111"
+                    "ab_meetrefuse_id_search": "11111"
                 }
             },
             "weight": {{function_score_params|weights|ab_meetrefuse_id_search}}
             },
             {
-            "filter": {
+              "filter": {
                 "term": {
-                "ba_meetpending_id_explorer": "11111"
+                  "ab_meetrefuse_id_explorer": "11111"
                 }
-            },
-            "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
+              },
+              "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
             },
             {
-            "filter": {
+              "filter": {
                 "term": {
-                "ba_meetpending_id_search": "11111"
+                  "ba_meetrefuse_id_search": "11111"
                 }
+              },
+              "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
             },
-            "weight": {{function_score_params|weights|ba_meetpending_id_search}}
+            {
+              "filter": {
+                "term": {
+                  "ba_meetrefuse_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_search": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_search}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_search_super": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_search_super}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_explorer_super": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_explorer_super}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ba_meetpending_id_search": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetpending_id_search}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ba_meetpending_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
             },
 			{
 			"filter": {
@@ -832,16 +952,26 @@ Feature: Generate valid search queries with fake request id "11111"
                     }
                 ],
                 "must_not": [
-                    {
-                    "term": {
-                        "node_id": "11111"
-                    }
-                    },
-                    {
-                    "term": {
-                        "meet_id": "11111"
-                    }
-                    }
+                        {
+                        "term": {
+                            "node_id": "11111"
+                        }
+                        },
+                        {
+                        "term": {
+                            "meet_id": "11111"
+                        }
+                        },
+                        {
+                        "term": {
+                            "ba_meetpending_id_search_super": "11111"
+                        }
+                        },
+                        {
+                          "term": {
+                            "ba_meetpending_id_explorer_super": "11111"
+                        }
+                        }
                 ]
                 }
             },
@@ -928,66 +1058,82 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                "ab_meetpending_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetpending_id_search": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetpending_id_search}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ba_meetrefuse_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ba_meetrefuse_id_search": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetrefuse_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetrefuse_id_search": "11111"
+                    "ab_meetrefuse_id_search": "11111"
                 }
             },
             "weight": {{function_score_params|weights|ab_meetrefuse_id_search}}
             },
             {
-            "filter": {
+              "filter": {
                 "term": {
-                "ba_meetpending_id_explorer": "11111"
+                  "ab_meetrefuse_id_explorer": "11111"
                 }
-            },
-            "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
+              },
+              "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
             },
             {
-            "filter": {
+              "filter": {
                 "term": {
-                "ba_meetpending_id_search": "11111"
+                  "ba_meetrefuse_id_search": "11111"
                 }
+              },
+              "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
             },
-            "weight": {{function_score_params|weights|ba_meetpending_id_search}}
+            {
+              "filter": {
+                "term": {
+                  "ba_meetrefuse_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_search": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_search}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_search_super": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_search_super}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_explorer_super": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_explorer_super}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ba_meetpending_id_search": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetpending_id_search}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ba_meetpending_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
             },
 			{
             "filter": {
@@ -1074,16 +1220,26 @@ Feature: Generate valid search queries with fake request id "11111"
                 }
                 ],
                 "must_not": [
-                    {
-                    "term": {
-                        "node_id": "11111"
-                    }
-                    },
-                    {
-                    "term": {
-                        "meet_id": "11111"
-                    }
-                    }
+                        {
+                        "term": {
+                            "node_id": "11111"
+                        }
+                        },
+                        {
+                        "term": {
+                            "meet_id": "11111"
+                        }
+                        },
+                        {
+                        "term": {
+                            "ba_meetpending_id_search_super": "11111"
+                        }
+                        },
+                        {
+                          "term": {
+                            "ba_meetpending_id_explorer_super": "11111"
+                        }
+                        }
                 ]
                 }
             },
@@ -1221,66 +1377,82 @@ Feature: Generate valid search queries with fake request id "11111"
             {
             "filter": {
                 "term": {
-                "ab_meetpending_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetpending_id_search": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetpending_id_search}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ba_meetrefuse_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ba_meetrefuse_id_search": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetrefuse_id_explorer": "11111"
-                }
-            },
-            "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
-            },
-            {
-            "filter": {
-                "term": {
-                "ab_meetrefuse_id_search": "11111"
+                    "ab_meetrefuse_id_search": "11111"
                 }
             },
             "weight": {{function_score_params|weights|ab_meetrefuse_id_search}}
             },
             {
-            "filter": {
+              "filter": {
                 "term": {
-                "ba_meetpending_id_explorer": "11111"
+                  "ab_meetrefuse_id_explorer": "11111"
                 }
-            },
-            "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
+              },
+              "weight": {{function_score_params|weights|ab_meetrefuse_id_explorer}}
             },
             {
-            "filter": {
+              "filter": {
                 "term": {
-                "ba_meetpending_id_search": "11111"
+                  "ba_meetrefuse_id_search": "11111"
                 }
+              },
+              "weight": {{function_score_params|weights|ba_meetrefuse_id_search}}
             },
-            "weight": {{function_score_params|weights|ba_meetpending_id_search}}
+            {
+              "filter": {
+                "term": {
+                  "ba_meetrefuse_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetrefuse_id_explorer}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_search": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_search}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_search_super": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_search_super}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_explorer}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ab_meetpending_id_explorer_super": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ab_meetpending_id_explorer_super}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ba_meetpending_id_search": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetpending_id_search}}
+            },
+            {
+              "filter": {
+                "term": {
+                  "ba_meetpending_id_explorer": "11111"
+                }
+              },
+              "weight": {{function_score_params|weights|ba_meetpending_id_explorer}}
             }
         ],
         "query": {
@@ -1296,6 +1468,16 @@ Feature: Generate valid search queries with fake request id "11111"
                         {
                         "term": {
                             "meet_id": "11111"
+                        }
+                        },
+                        {
+                        "term": {
+                            "ba_meetpending_id_search_super": "11111"
+                        }
+                        },
+                        {
+                          "term": {
+                            "ba_meetpending_id_explorer_super": "11111"
                         }
                         }
                     ]
