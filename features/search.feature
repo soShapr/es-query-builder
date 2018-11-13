@@ -199,7 +199,11 @@ Feature: Generate valid search queries with fake request id "11111"
         "node_id"
     ],
     "from" : 0, 
-    "size" : 20
+    "size" : 20,
+    "sort": [
+        "_score",
+        "_doc"
+    ]
     }
     """
 
@@ -402,7 +406,11 @@ Feature: Generate valid search queries with fake request id "11111"
         "node_id"
     ],
     "from" : 0, 
-    "size" : 20
+    "size" : 20,
+    "sort": [
+        "_score",
+        "_doc"
+    ]
     }
     """
 
@@ -615,7 +623,11 @@ Feature: Generate valid search queries with fake request id "11111"
         "node_id"
     ],
     "from" : 0, 
-    "size" : 20
+    "size" : 20,
+    "sort": [
+        "_score",
+        "_doc"
+    ]
     }
     """
 
@@ -795,7 +807,11 @@ Feature: Generate valid search queries with fake request id "11111"
         "node_id"
     ],
     "from" : 0, 
-    "size" : 20
+    "size" : 20,
+    "sort": [
+        "_score",
+        "_doc"
+    ]
     }
     """
 
@@ -988,7 +1004,11 @@ Feature: Generate valid search queries with fake request id "11111"
         "node_id"
     ],
     "from" : 0, 
-    "size" : 20
+    "size" : 20,
+    "sort": [
+        "_score",
+        "_doc"
+    ]
     }
     """
 
@@ -1312,7 +1332,11 @@ Feature: Generate valid search queries with fake request id "11111"
         "node_id"
     ],
     "from" : 0, 
-    "size" : 20
+    "size" : 20,
+    "sort": [
+        "_score",
+        "_doc"
+    ]
     }
     """
 
@@ -1526,7 +1550,11 @@ Feature: Generate valid search queries with fake request id "11111"
         "node_id"
     ],
     "from" : 0, 
-    "size" : 20
+    "size" : 20,
+    "sort": [
+        "_score",
+        "_doc"
+    ]
     }
     """
 
