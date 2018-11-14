@@ -436,7 +436,7 @@ class queryBuilder implements queryBuilderInterface
 		// construct function score
         $function_score = array("function_score" => array_merge(array("functions" => $functions["functions"], "query" => $main_query["query"]), $agg_modes));
 
-        return array("query" => $function_score, "_source" => $conf["source_fields"], "from"=>$from, "size"=>$size, "explain"=>$explain);
+        return array("query" => $function_score, "_source" => $conf["source_fields"], "from"=>$from, "size"=>$size, "explain"=>$explain,"sort"=>array("_score", "_doc"));
     }
 
     /**
